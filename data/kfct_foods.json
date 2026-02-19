@@ -1,0 +1,32 @@
+[
+    {
+        "food_item": "Ugali",
+        "nutritional_values": {
+            "calories": 200,
+            "carbohydrates": "45g",
+            "protein": "6g",
+            "fat": "1g"
+        },
+        "market_price_2026": "50 KES"
+    },
+    {
+        "food_item": "Sukuma Wiki",
+        "nutritional_values": {
+            "calories": 33,
+            "carbohydrates": "6g",
+            "protein": "2g",
+            "fat": "0.3g"
+        },
+        "market_price_2026": "30 KES"
+    },
+    {
+        "food_item": "Nyama Choma",
+        "nutritional_values": {
+            "calories": 250,
+            "carbohydrates": "0g",
+            "protein": "25g",
+            "fat": "18g"
+        },
+        "market_price_2026": "300 KES"
+    }
+]
