@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
-from core.llm_meal_planner import MealPlanner
+from core.planner_dispatcher import MealPlanner
 from core.planner_backends import PlannerConnectionError, PlannerModelNotFound, PlannerResponseValidationError
 from ui.plan_display import display_plan_visualizations
 from core.reporting import MealPlanReporter

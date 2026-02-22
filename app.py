@@ -103,7 +103,7 @@ if app_mode == "🏠 Home":
         st.subheader("Features")
         st.markdown("""
         - **🔍 Food Search:** Instantly search the comprehensive Kenya Food Composition Tables (2018).
-        - **🍽️ Automated Meal Planner:** Generate personalized, culturally-aware meal plans using local (Ollama) or cloud-based (Gemini) models.
+        - **🍽️ Automated Meal Planner:** Generate personalized, culturally-aware meal plans.
         - **📄 Client Reports:** Create professional, print-ready PDF reports for your clients.
         - **⚙️ Fully Customizable:** Edit food prices, manage client data, and more.
         - **🔒 Privacy-First:** All your data stays on your computer. No cloud, no internet required after setup.
@@ -190,13 +190,12 @@ elif app_mode == "⚙️ Settings":
     with st.expander("Planner Backend Settings", expanded=True):
         st.markdown("""
         Choose the backend for generating meal plans.
-        - **Ollama:** Uses a local model running on your machine. 100% private and offline.
         - **Gemini:** Uses Google's API. Requires an internet connection and an API key.
         """)
 
         # Initialize session state for settings if they don't exist
         if 'planner_backend' not in st.session_state:
-            st.session_state.planner_backend = "Ollama"
+            st.session_state.planner_backend = "Gemini" # Default to API-first
         if 'gemini_api_key' not in st.session_state:
             st.session_state.gemini_api_key = ""
         if 'ollama_model' not in st.session_state:
@@ -205,8 +204,8 @@ elif app_mode == "⚙️ Settings":
         # UI for backend selection
         st.session_state.planner_backend = st.selectbox(
             "Select Planner Backend",
-            ("Ollama", "Gemini"),
-            index=0 if st.session_state.planner_backend == "Ollama" else 1
+            ("Gemini",), # "Ollama" is hidden but code remains
+            index=0
         )
 
         # UI for specific backend settings
