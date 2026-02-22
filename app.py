@@ -73,7 +73,7 @@ with st.sidebar:
     # Using radio buttons for tab-like navigation in the sidebar
     app_mode = st.radio(
         "Go to",
-        ["🏠 Home", "🔍 Food Search", "🍽️ AI Meal Planner", "📄 Client Reports", "⚙️ Settings"],
+        ["🏠 Home", "🔍 Food Search", "🍽️ Automated Meal Planner", "📄 Client Reports", "⚙️ Settings"],
         label_visibility="collapsed"
     )
     
@@ -103,7 +103,7 @@ if app_mode == "🏠 Home":
         st.subheader("Features")
         st.markdown("""
         - **🔍 Food Search:** Instantly search the comprehensive Kenya Food Composition Tables (2018).
-        - **🍽️ AI Meal Planner:** Generate personalized, culturally-aware meal plans using a built-in AI.
+        - **🍽️ Automated Meal Planner:** Generate personalized, culturally-aware meal plans using local (Ollama) or cloud-based (Gemini) models.
         - **📄 Client Reports:** Create professional, print-ready PDF reports for your clients.
         - **⚙️ Fully Customizable:** Edit food prices, manage client data, and more.
         - **🔒 Privacy-First:** All your data stays on your computer. No cloud, no internet required after setup.
@@ -186,8 +186,50 @@ elif app_mode == "⚙️ Settings":
                 st.success("All client data has been deleted.")
                 st.rerun()
     
-    # --- Ollama Model Selector ---
-    with st.expander("AI Model Settings"):
-        st.text_input("Ollama Model Name", value="deepseekcoderafya", key="ollama_model")
-        st.caption("Ensure this model is available in your local Ollama instance.")
+    # --- Planner Backend Settings ---
+    with st.expander("Planner Backend Settings", expanded=True):
+        st.markdown("""
+        Choose the backend for generating meal plans.
+        - **Ollama:** Uses a local model running on your machine. 100% private and offline.
+        - **Gemini:** Uses Google's API. Requires an internet connection and an API key.
+        """)
+
+        # Initialize session state for settings if they don't exist
+        if 'planner_backend' not in st.session_state:
+            st.session_state.planner_backend = "Ollama"
+        if 'gemini_api_key' not in st.session_state:
+            st.session_state.gemini_api_key = ""
+        if 'ollama_model' not in st.session_state:
+            st.session_state.ollama_model = "deepseekcoderafya"
+
+        # UI for backend selection
+        st.session_state.planner_backend = st.selectbox(
+            "Select Planner Backend",
+            ("Ollama", "Gemini"),
+            index=0 if st.session_state.planner_backend == "Ollama" else 1
+        )
+
+        # UI for specific backend settings
+        if st.session_state.planner_backend == "Ollama":
+            st.session_state.ollama_model = st.text_input(
+                "Ollama Model Name",
+                value=st.session_state.ollama_model
+            )
+            st.caption("Ensure this model is available in your local Ollama instance (`ollama pull <model_name>`).")
+        
+        elif st.session_state.planner_backend == "Gemini":
+            st.session_state.gemini_api_key = st.text_input(
+                "Gemini API Key",
+                value=st.session_state.gemini_api_key,
+                type="password",
+                help="Get your key from Google AI Studio."
+            )
+            st.warning("""
+            **Security Warning:** For simplicity, this UI saves your key in the session. 
+            For production use, it is strongly recommended to use Streamlit Secrets.
+            Add your key to a `.streamlit/secrets.toml` file like this:
+            `GEMINI_API_KEY = "YOUR_KEY_HERE"`
+            """, icon="🔒")
+
+        st.success(f"Backend set to **{st.session_state.planner_backend}**.")
 ```

@@ -1,15 +1,18 @@
 # filepath: components/meal_planner_ui.py
 import streamlit as st
 import pandas as pd
-import plotly.graph_objects as go
-from core.llm_meal_planner import MealPlannerLLM
+from io import BytesIO
+from core.llm_meal_planner import MealPlanner
+from core.planner_backends import PlannerConnectionError, PlannerModelNotFound, PlannerResponseValidationError
+from ui.plan_display import display_plan_visualizations
+from core.reporting import MealPlanReporter
 
 def show_meal_planner_ui(food_df: pd.DataFrame):
     """
-    Renders the AI Meal Planner UI and handles the interaction logic.
+    Renders the Meal Planner UI and handles the interaction logic.
     """
-    st.header("🍽️ AI-Powered Meal Planner")
-    st.write("Generate a personalized meal plan using a local AI model. The plan will be based on your health goals and the available Kenyan foods.")
+    st.header("🍽️ Automated Meal Planner")
+    st.write("Generate a personalized meal plan based on your health goals and locally available Kenyan foods.")
 
     # Initialize session state for the meal plan
     if 'meal_plan' not in st.session_state:
@@ -34,9 +37,8 @@ def show_meal_planner_ui(food_df: pd.DataFrame):
         condition = st.selectbox(
             "Primary Health Goal or Condition",
             [
-                "General Wellness", "Weight Loss", "Weight Gain", "Diabetes Type 2 Management",
-                "Hypertension (High Blood Pressure)", "Pregnancy", "Anemia Prevention",
-                "Child Nutrition (Age 5+)"
+                "General Wellness", "Weight Loss", "Weight Gain", "Diabetes Type 2",
+                "Hypertension", "Pregnancy", "Anaemia"
             ]
         )
         preferences = st.text_input("Food Preferences or Allergies", "e.g., vegetarian, no pork, allergic to nuts")
@@ -58,49 +60,86 @@ def show_meal_planner_ui(food_df: pd.DataFrame):
         # Prepare food list for the LLM
         food_list_str = ", ".join(food_df['food_name_english'].unique())
         
-        # Instantiate and run the LLM planner
-        planner = MealPlannerLLM() # Model can be configured in settings later
-        with st.spinner("🧠 The AI is thinking..."):
-            meal_plan_response = planner.generate_meal_plan(user_inputs, food_list_str)
+        try:
+            # Construct backend configuration from session state
+            backend_config = {
+                "name": st.session_state.get('planner_backend', 'Ollama').lower(),
+                "model": st.session_state.get('ollama_model') if st.session_state.get('planner_backend') == 'Ollama' else 'gemini-1.5-flash',
+                "api_key": st.session_state.get('gemini_api_key')
+            }
+            
+            # Check for Gemini API key if that's the selected backend
+            if backend_config["name"] == "gemini" and not backend_config["api_key"]:
+                st.error("Gemini API key is missing. Please add it in the ⚙️ Settings page.")
+                st.stop()
 
-        if meal_plan_response and "error" not in meal_plan_response:
+            with st.spinner(f"🧑‍🍳 Initializing the {st.session_state.get('planner_backend', 'Ollama')} planner..."):
+                planner = MealPlanner(backend_config=backend_config)
+            
+            with st.spinner("Generating your personalized meal plan... This may take a moment."):
+                meal_plan_response, prompt = planner.generate_meal_plan(user_inputs, food_list_str)
+
             st.session_state.meal_plan = meal_plan_response
             st.success("Your personalized meal plan has been generated!")
-        else:
+
+        except (PlannerConnectionError, PlannerModelNotFound) as e:
             st.session_state.meal_plan = None
-            st.error("The AI failed to generate a valid plan. This could be a temporary issue. Please try adjusting your inputs or try again.")
+            st.error(f"A problem occurred with the Automated Planner Backend: {e}")
+        except PlannerResponseValidationError as e:
+            st.session_state.meal_plan = None
+            st.error(f"The planner returned data in an unexpected format. Please try again. Details: {e}")
+            with st.expander("Show Raw Planner Output"):
+                st.code(e.raw_content, language='json')
+        except Exception as e:
+            st.session_state.meal_plan = None
+            st.error(f"An unexpected error occurred: {e}")
+
 
     # --- Display Generated Meal Plan ---
     if st.session_state.meal_plan:
         st.divider()
         st.subheader("Your Custom Meal Plan")
 
+        # --- Download Button ---
+        # Generate the PDF in memory
+        reporter = MealPlanReporter(st.session_state.meal_plan, st.session_state.last_user_inputs)
+        pdf_buffer = BytesIO()
+        reporter.generate_report(pdf_buffer)
+        pdf_buffer.seek(0)
+        
+        st.download_button(
+            label="📥 Download PDF Report",
+            data=pdf_buffer,
+            file_name="AfyaPlate_Meal_Plan.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
+        st.caption("Includes daily plan and a consolidated shopping list.")
+
         plan = st.session_state.meal_plan
         for day_plan in plan.get('days', []):
-            with st.expander(f"**Day {day_plan['day']}** - View Plan", expanded=day_plan['day']==1):
+            with st.expander(f"**Day {day_plan['day']}** - View Day Plan", expanded=day_plan['day']==1):
                 display_daily_plan(day_plan)
         
-        # --- Shopping List ---
-        st.subheader("🛒 Shopping List")
-        shopping_list = generate_shopping_list(plan)
-        if shopping_list:
-            shopping_text = ""
-            for item, count in shopping_list.items():
-                shopping_text += f"- {item.capitalize()}
-"
-            st.markdown(shopping_text)
-        else:
-            st.info("Could not generate a shopping list from the plan.")
+        st.divider()
+        # --- Visualizations ---
+        display_plan_visualizations(st.session_state.meal_plan)
 
 
 def display_daily_plan(day_plan):
     """Renders the UI for a single day's meal plan."""
     meals = day_plan.get('meals', {})
     
-    meal_cols = st.columns(len(meals))
+    # Determine number of columns based on available meals
+    meal_types_present = [m for m in ['breakfast', 'lunch', 'dinner', 'snacks'] if m in meals and meals[m]]
+    if not meal_types_present:
+        st.info("No meals defined for this day.")
+        return
+
+    meal_cols = st.columns(len(meal_types_present))
     
-    for i, (meal_type, meal_details) in enumerate(meals.items()):
-        if not meal_details: continue
+    for i, meal_type in enumerate(meal_types_present):
+        meal_details = meals[meal_type]
         with meal_cols[i]:
             st.markdown(f"**{meal_type.title()}**")
             with st.container(border=True):
@@ -108,28 +147,13 @@ def display_daily_plan(day_plan):
                 
                 ingredients = meal_details.get('ingredients', [])
                 if ingredients:
-                    st.markdown("
-".join(f"- <small>{ing}</small>" for ing in ingredients), unsafe_allow_html=True)
+                    st.markdown("\n".join(f"- <small>{ing}</small>" for ing in ingredients), unsafe_allow_html=True)
 
                 if 'cost' in meal_details and meal_details['cost']:
-                    st.caption(f"Est. Cost: KSh {meal_details['cost']}")
-
-
-def generate_shopping_list(plan: dict) -> dict:
-    """Generates an aggregated shopping list from the meal plan."""
-    if not plan or 'days' not in plan:
-        return {}
-    
-    all_ingredients = []
-    for day in plan['days']:
-        for meal_type, meal_details in day.get('meals', {}).items():
-            if meal_details and 'ingredients' in meal_details:
-                all_ingredients.extend([ing.lower().strip() for ing in meal_details['ingredients']])
-    
-    # Count occurrences of each ingredient
-    shopping_dict = {}
-    for item in all_ingredients:
-        shopping_dict[item] = shopping_dict.get(item, 0) + 1
-        
-    return shopping_dict
-```
+                    st.caption(f"Est. Cost: KSh {meal_details['cost']:.0f}")
+                
+                # Display key nutrients
+                nutrients = meal_details.get('nutrients', {})
+                cal_str = f"{nutrients.get('calories', 0):.0f} kcal"
+                prot_str = f"{nutrients.get('protein', 0):.0f}g protein"
+                st.caption(f"{cal_str}, {prot_str}")

@@ -6,3 +6,4 @@ fpdf2
 camelot-py[cv]
 tabula-py
 python-dotenv
+google-generativeai
