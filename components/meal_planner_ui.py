@@ -24,15 +24,15 @@ def show_meal_planner_ui(food_df: pd.DataFrame):
     with st.form("meal_plan_form"):
         st.subheader("Tell us about yourself")
         
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         with col1:
             age = st.number_input("Age", min_value=1, max_value=100, value=30, step=1)
-            kcal_goal = st.slider("Daily Calorie Goal (kcal)", 1000, 4000, 2000, 100)
-            days = st.slider("Number of Days for Plan", 1, 7, 3)
-
-        with col2:
             gender = st.selectbox("Gender", ["Female", "Male"])
+        with col2:
+            kcal_goal = st.slider("Daily Calorie Goal (kcal)", 1000, 4000, 2000, 100)
             budget = st.slider("Approx. Budget per Day (KSh)", 200, 2000, 500, 50)
+        with col3:
+            days = st.slider("Number of Days for Plan", 1, 7, 3)
             
         condition = st.selectbox(
             "Primary Health Goal or Condition",
@@ -43,7 +43,7 @@ def show_meal_planner_ui(food_df: pd.DataFrame):
         )
         preferences = st.text_input("Food Preferences or Allergies", "e.g., vegetarian, no pork, allergic to nuts")
 
-        submitted = st.form_submit_button("✨ Generate Meal Plan", use_container_width=True)
+        submitted = st.form_submit_button("✨ Generate Meal Plan", width='stretch')
 
     if submitted:
         if food_df.empty:
@@ -58,7 +58,7 @@ def show_meal_planner_ui(food_df: pd.DataFrame):
         st.session_state.last_user_inputs = user_inputs
 
         # Prepare food list for the LLM
-        food_list_str = ", ".join(food_df['food_name_english'].unique())
+        food_list_str = ", ".join(food_df['display_name'].unique())
         
         try:
             # Construct backend configuration from session state
@@ -101,7 +101,7 @@ def show_meal_planner_ui(food_df: pd.DataFrame):
         st.subheader("Your Custom Meal Plan")
 
         # --- Download Button ---
-        # Generate the PDF in memory
+        # In a real app, you might want to pass the RDN details from a config or user input
         reporter = MealPlanReporter(st.session_state.meal_plan, st.session_state.last_user_inputs)
         pdf_buffer = BytesIO()
         reporter.generate_report(pdf_buffer)
@@ -112,9 +112,9 @@ def show_meal_planner_ui(food_df: pd.DataFrame):
             data=pdf_buffer,
             file_name="AfyaPlate_Meal_Plan.pdf",
             mime="application/pdf",
-            use_container_width=True
+            width='stretch'
         )
-        st.caption("Includes daily plan and a consolidated shopping list.")
+        st.caption("Includes a daily plan and a consolidated shopping list.")
 
         plan = st.session_state.meal_plan
         for day_plan in plan.get('days', []):
@@ -129,6 +129,7 @@ def show_meal_planner_ui(food_df: pd.DataFrame):
 def display_daily_plan(day_plan):
     """Renders the UI for a single day's meal plan."""
     meals = day_plan.get('meals', {})
+    meal_icons = {"breakfast": "🥞", "lunch": "🥗", "dinner": "🍲", "snacks": "🍎"}
     
     # Determine number of columns based on available meals
     meal_types_present = [m for m in ['breakfast', 'lunch', 'dinner', 'snacks'] if m in meals and meals[m]]
@@ -141,7 +142,7 @@ def display_daily_plan(day_plan):
     for i, meal_type in enumerate(meal_types_present):
         meal_details = meals[meal_type]
         with meal_cols[i]:
-            st.markdown(f"**{meal_type.title()}**")
+            st.markdown(f"**{meal_icons.get(meal_type, '')} {meal_type.title()}**")
             with st.container(border=True):
                 st.markdown(f"*{meal_details.get('name', 'N/A')}*")
                 

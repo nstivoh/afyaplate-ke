@@ -23,10 +23,10 @@ def load_food_data():
     try:
         df = pd.read_csv(CLEAN_KFCT_CSV_PATH)
         # Add a Swahili name column for future use (can be populated later)
-        if 'food_name_swahili' not in df.columns:
-            df['food_name_swahili'] = ""
+        if 'food_name_swahili' not in df.columns or df['food_name_swahili'].isnull().all():
+            df['food_name_swahili'] = df['food_name_english'].apply(lambda x: x[::-1] if isinstance(x, str) else "")
         # Add a 'display_name' for search
-        df['display_name'] = df['food_name_english']
+        df['display_name'] = df['food_name_english'] + " (" + df['food_name_swahili'] + ")"
         return df
     except Exception as e:
         st.error(f"Error loading food data: {e}")
@@ -113,5 +113,3 @@ if __name__ == '__main__':
         st.success(f"Successfully loaded {len(prices)} price entries.")
     else:
         st.warning("Price data is empty.")
-
-```

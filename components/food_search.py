@@ -67,15 +67,14 @@ def show_food_search(food_df: pd.DataFrame):
 
     # 3. Fuzzy Search
     if search_query:
-        # Combine English and Swahili names for a comprehensive search
-        # In a real app, 'food_name_swahili' would be populated
-        searchable_series = filtered_df['food_name_english'].fillna('') # + " " + filtered_df['food_name_swahili'].fillna('')
+        searchable_series = filtered_df['display_name'].fillna('')
         
         # Use rapidfuzz to find best matches
         extracted_matches = process.extract(search_query, searchable_series, scorer=fuzz.WRatio, limit=len(filtered_df))
         
         # Get indices of good matches (score > 75)
-        matched_indices = [index for _, score, index in extracted_matches if score > 75]
+        # The index in extracted_matches is the series index, so we can use .loc
+        matched_indices = [index for _, _, index in extracted_matches if _ > 75]
         
         # Re-create a dataframe from the matched indices
         filtered_df = filtered_df.loc[matched_indices] if matched_indices else pd.DataFrame(columns=filtered_df.columns)
@@ -100,8 +99,8 @@ def show_food_search(food_df: pd.DataFrame):
 
         # --- Data Display and Export ---
         st.dataframe(
-            display_df[['food_name_english', 'category'] + nutrient_cols],
-            use_container_width=True,
+            display_df[['display_name', 'category'] + nutrient_cols],
+            width='stretch',
             hide_index=True
         )
 
@@ -142,5 +141,4 @@ def show_food_search(food_df: pd.DataFrame):
                 color_discrete_sequence=px.colors.qualitative.Pastel1
             )
             fig.update_layout(yaxis={'categoryorder':'total ascending'})
-            st.plotly_chart(fig, use_container_width=True)
-```
+            st.plotly_chart(fig, width='stretch')

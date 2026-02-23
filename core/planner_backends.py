@@ -2,7 +2,7 @@
 import os
 import abc
 import ollama
-import google.generativeai as genai
+import google.genai as genai
 from typing import Dict, Any, Tuple
 
 # --- Custom Exceptions (can be shared or moved to a central place) ---
@@ -104,7 +104,7 @@ class GeminiBackend(MealPlannerBackend):
             # Gemini's JSON mode is engaged by the prompt instructions
             response = self.client.generate_content(
                 prompt,
-                generation_config=genai.types.GenerationConfig(
+                generation_config=genai.GenerationConfig(
                     response_mime_type="application/json"
                 )
             )
@@ -146,8 +146,7 @@ if __name__ == '__main__':
     except (ValueError, PlannerConnectionError, PlannerModelNotFound) as e:
         print(f"Ollama Error: {e}")
 
-    print("
---- Testing Gemini Backend ---")
+    print("\n--- Testing Gemini Backend ---")
     # You would typically get the API key from a secure source
     gemini_api_key = os.environ.get("GEMINI_API_KEY", "YOUR_API_KEY_HERE")
     if gemini_api_key == "YOUR_API_KEY_HERE":

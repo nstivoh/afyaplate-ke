@@ -146,7 +146,7 @@ class MealPlanner:
         # Combine user inputs with other prompt variables
         prompt_vars = {
             **user_inputs,
-            'food_list_str': food_list_str[:3000],  # Truncate to avoid excessive length
+            'food_list_str': food_list_str[:10000],  # Truncate to avoid excessive length
             'key_nutrients_str': ", ".join(f"'{n}'" for n in key_nutrients)
         }
         

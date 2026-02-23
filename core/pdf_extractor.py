@@ -99,8 +99,7 @@ def clean_table(df):
     df = df.reset_index(drop=True)
 
     # Clean cell values: replace newlines and weird characters
-    df = df.applymap(lambda x: str(x).replace('
-', ' ').replace('', ' ').strip() if isinstance(x, str) else x)
+    df = df.map(lambda x: str(x).replace('\n', ' ').strip() if isinstance(x, str) else x)
 
     return df
 
@@ -120,7 +119,7 @@ def standardize_columns(df):
         'carbohydrate': 'carbs_g',
         'fibre': 'fibre_g',
         'ca': 'calcium_mg', 'calcium': 'calcium_mg',
-        'fe': 'iron_mg', 'iron':셔츠': 'iron_mg',
+        'fe': 'iron_mg', 'iron': 'iron_mg',
         'zn': 'zinc_mg', 'zinc': 'zinc_mg',
         'vit a': 'vit_a_rae_mcg', 'retinol': 'vit_a_rae_mcg',
         'thiamin': 'thiamin_mg',
@@ -140,9 +139,10 @@ def standardize_columns(df):
         found = False
         for key, value in column_map.items():
             if key in col_name:
-                new_columns.append(value)
-                found = True
-                break
+                if value not in new_columns:
+                    new_columns.append(value)
+                    found = True
+                    break
         if not found:
             new_columns.append(f"unknown_{col}")
             
@@ -180,7 +180,8 @@ def post_process_data(df):
         df = standardize_columns(df)
         
     # Remove rows that are just headers repeated
-    df = df[~df['protein_g'].str.contains('protein', case=False, na=False)]
+    if 'protein_g' in df.columns:
+        df = df[~df['protein_g'].astype(str).str.contains('protein', case=False, na=False)]
 
     # Clean numeric columns
     nutrient_cols = [
@@ -197,28 +198,31 @@ def post_process_data(df):
             df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
 
     # Add category column (simple heuristic based on food code)
-    df['category'] = df['food_code'].str[0].map({
-        'A': 'Cereals and their products',
-        'B': 'Starchy roots, tubers, and their products',
-        'C': 'Legumes, and their products',
-        'D': 'Nuts, seeds and their products',
-        'E': 'Vegetables and their products',
-        'F': 'Fruits and their products',
-        'G': 'Meat, poultry and their products',
-        'H': 'Fish, other aquatic animals and their products',
-        'J': 'Milk, milk products and eggs',
-        'K': 'Oils and fats',
-        'L': 'Beverages',
-        'M': 'Spices and condiments',
-        'N': 'Miscellaneous',
-        'P': 'Infant foods',
-        'S': 'Foods for special dietary use',
-    }).fillna('Uncategorized')
+    if 'food_code' in df.columns:
+        df['category'] = df['food_code'].str[0].map({
+            'A': 'Cereals and their products',
+            'B': 'Starchy roots, tubers, and their products',
+            'C': 'Legumes, and their products',
+            'D': 'Nuts, seeds and their products',
+            'E': 'Vegetables and their products',
+            'F': 'Fruits and their products',
+            'G': 'Meat, poultry and their products',
+            'H': 'Fish, other aquatic animals and their products',
+            'J': 'Milk, milk products and eggs',
+            'K': 'Oils and fats',
+            'L': 'Beverages',
+            'M': 'Spices and condiments',
+            'N': 'Miscellaneous',
+            'P': 'Infant foods',
+            'S': 'Foods for special dietary use',
+        }).fillna('Uncategorized')
 
     # Final cleanup
-    df = df.dropna(subset=['food_name_english'])
-    df = df[df['food_name_english'].str.len() > 2] # Remove very short/invalid names
-    df = df.drop_duplicates(subset=['food_code', 'food_name_english'])
+    if 'food_name_english' in df.columns:
+        df = df.dropna(subset=['food_name_english'])
+        df = df[df['food_name_english'].str.len() > 2] # Remove very short/invalid names
+    if 'food_code' in df.columns and 'food_name_english' in df.columns:
+        df = df.drop_duplicates(subset=['food_code', 'food_name_english'])
     
     # Select and order final columns
     final_cols = ['food_code', 'food_name_english', 'category'] + nutrient_cols
@@ -235,5 +239,3 @@ if __name__ == '__main__':
             if not result_df.empty:
                 st.dataframe(result_df)
                 st.info(f"Data saved to {OUTPUT_CSV_PATH}")
-
-```

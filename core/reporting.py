@@ -121,11 +121,9 @@ class MealPlanReporter:
         for i, (item, count) in enumerate(items):
             line = f"{item} (x{count})"
             if i < midpoint:
-                col1 += line + "
-"
+                col1 += line + "\n"
             else:
-                col2 += line + "
-"
+                col2 += line + "\n"
                 
         # Create a layout with two columns
         pdf.multi_cell(95, 5, col1, 0, 'L')

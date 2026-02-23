@@ -71,7 +71,7 @@ def display_plan_visualizations(meal_plan: Dict[str, Any]):
                 uniformtext_mode='hide',
                 xaxis_title=None
             )
-            st.plotly_chart(fig_nutrients, use_container_width=True)
+            st.plotly_chart(fig_nutrients, width='stretch')
 
         elif chart_view == "Cost Analysis":
             cost_col = None
@@ -101,7 +101,7 @@ def display_plan_visualizations(meal_plan: Dict[str, Any]):
                     hole=0.4,
                 )
                 fig_cost_pie.update_traces(textposition='inside', textinfo='percent+label')
-                st.plotly_chart(fig_cost_pie, use_container_width=True)
+                st.plotly_chart(fig_cost_pie, width='stretch')
 
     except Exception as e:
         st.error(f"An error occurred while creating visualizations: {e}")

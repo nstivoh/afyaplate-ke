@@ -25,42 +25,9 @@ from components.report_generator import show_report_generator
 import json
 from components.home_page import show_home_page
 
-# --- Asset and Branding ---
-def load_css():
-    st.markdown("""
-    <style>
-    /* Main colors from config.toml */
-    .stApp {
-        background_color: #F8F9FA;
-    }
-    /* Custom title */
-    .title {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #008000; /* Green */
-        display: flex;
-        align-items: center;
-    }
-    .title-flag {
-        font-size: 2.5rem;
-        margin-right: 10px;
-    }
-    .subtitle {
-        font-size: 1.1rem;
-        color: #333;
-        font-style: italic;
-    }
-    /* Sidebar styling */
-    [data-testid="stSidebar"] {
-        background-color: #F0F2F6;
-    }
-    [data-testid="stSidebar"] .stMarkdown h2 {
-        color: #008000; /* Green */
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-load_css()
+def load_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # --- Main App ---
 
@@ -70,13 +37,12 @@ with st.sidebar:
     st.markdown('<p class="subtitle">Built by Stephen – Kenyan Registered Dietitian Nutritionist</p>', unsafe_allow_html=True)
     st.divider()
 
-    st.markdown("## Navigation")
-    # Using radio buttons for tab-like navigation in the sidebar
-    app_mode = st.radio(
-        "Go to",
-        ["🏠 Home", "🔍 Food Search", "🍽️ Automated Meal Planner", "📄 Client Reports", "⚙️ Settings"],
-        label_visibility="collapsed"
-    )
+    st.markdown("## Theme")
+    theme = st.selectbox("Select Theme", ["Light", "Dark"])
+    if theme == "Light":
+        load_css("assets/light.css")
+    else:
+        load_css("assets/dark.css")
     
     st.divider()
     st.info("Get the Pro version for extra recipes and custom meal models!", icon="🌟")
@@ -94,20 +60,21 @@ food_data = load_food_data()
 
 
 # --- Tab/Page Routing ---
-if app_mode == "🏠 Home":
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏠 Home", "🔍 Food Search", "🍽️ Automated Meal Planner", "📄 Client Reports", "⚙️ Settings"])
+
+with tab1:
     show_home_page()
 
-
-elif app_mode == "🔍 Food Search":
+with tab2:
     show_food_search(food_data)
 
-elif app_mode == "🍽️ Automated Meal Planner":
+with tab3:
     show_meal_planner_ui(food_data)
 
-elif app_mode == "📄 Client Reports":
+with tab4:
     show_report_generator()
 
-elif app_mode == "⚙️ Settings":
+with tab5:
     st.title("⚙️ Settings & Data Management")
     st.write("Manage the application's data and settings.")
 

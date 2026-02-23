@@ -15,12 +15,17 @@ def show_report_generator():
         st.warning("No active meal plan found. Please generate a plan in the 'AI Meal Planner' tab first.", icon="🍽️")
         return
 
-    st.subheader("1. Enter Client Details")
+    st.subheader("1. Enter Professional and Client Details")
     with st.form("client_details_form"):
-        client_name = st.text_input("Client Full Name", "Jane Doe")
-        client_age = st.number_input("Client Age", 1, 100, 35)
-        
-        # Pull condition from the last meal plan generation if available
+        col1, col2 = st.columns(2)
+        with col1:
+            rdn_name = st.text_input("Your Name (RDN)", "Stephen")
+            client_name = st.text_input("Client Full Name", "Jane Doe")
+            
+        with col2:
+            rdn_title = st.text_input("Your Title", "Kenyan Registered Dietitian Nutritionist (RDN)")
+            client_age = st.number_input("Client Age", 1, 100, 35)
+
         last_condition = st.session_state.get('last_user_inputs', {}).get('condition', "General Wellness")
         client_condition = st.text_input("Diagnosis / Health Goal", last_condition)
 
@@ -30,9 +35,11 @@ def show_report_generator():
         st.session_state.client_info_for_report = {
             "name": client_name,
             "age": client_age,
-            "condition": client_condition
+            "condition": client_condition,
+            "rdn_name": rdn_name,
+            "rdn_title": rdn_title,
         }
-        st.success("Client details saved for the report.")
+        st.success("Details saved for the report.")
 
 
     if 'client_info_for_report' in st.session_state:
@@ -45,18 +52,24 @@ def show_report_generator():
         st.write("The following details will be included in the report:")
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown(f"- **Client:** {client_info['name']}, Age {client_info['age']}")
-            st.markdown(f"- **Goal:** {client_info['condition']}")
+            st.markdown(f"**Prepared by:** {client_info['rdn_name']} ({client_info['rdn_title']})")
+            st.markdown(f"**Client:** {client_info['name']}, Age {client_info['age']}")
+            st.markdown(f"**Goal:** {client_info['condition']}")
         with col2:
-            st.markdown(f"- **Plan Length:** {len(meal_plan['days'])} days")
-            st.markdown(f"- **Generated on:** {datetime.datetime.now().strftime('%Y-%m-%d')}")
+            st.markdown(f"**Plan Length:** {len(meal_plan['days'])} days")
+            st.markdown(f"**Generated on:** {datetime.datetime.now().strftime('%Y-%m-%d')}")
             
 
-        st.info("The currently active meal plan from the 'AI Meal Planner' tab will be used in this report.", icon="ℹ️")
+        st.info("The currently active meal plan from the 'Automated Meal Planner' tab will be used in this report.", icon="ℹ️")
 
-        if st.button("Generate PDF Report", use_container_width=True, type="primary"):
+        if st.button("Generate PDF Report", width='stretch', type="primary"):
             with st.spinner("Creating your PDF report..."):
-                pdf_bytes = generate_report(client_info, meal_plan)
+                pdf_bytes = generate_report(
+                    client_info, 
+                    meal_plan, 
+                    rdn_name=client_info['rdn_name'], 
+                    rdn_title=client_info['rdn_title']
+                )
 
             if pdf_bytes:
                 st.success("Your report has been generated!")
@@ -68,8 +81,7 @@ def show_report_generator():
                     data=pdf_bytes,
                     file_name=file_name,
                     mime="application/pdf",
-                    use_container_width=True
+                    width='stretch'
                 )
             else:
                 st.error("Failed to generate the PDF. Please check the logs for errors.")
-```
