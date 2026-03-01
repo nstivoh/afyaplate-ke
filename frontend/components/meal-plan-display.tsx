@@ -47,11 +47,11 @@ const SwapSuggestions = ({ item, onSwap }: { item: MealItem, onSwap: (newItemNam
       <PopoverContent className="w-48 p-2">
         <ul className="space-y-1">
           {getSuggestions(item.food_name).map(suggestion => (
-             <li key={suggestion}>
-               <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => onSwap(suggestion)}>
-                  {suggestion}
-               </Button>
-             </li>
+            <li key={suggestion}>
+              <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => onSwap(suggestion)}>
+                {suggestion}
+              </Button>
+            </li>
           ))}
         </ul>
       </PopoverContent>
@@ -60,7 +60,7 @@ const SwapSuggestions = ({ item, onSwap }: { item: MealItem, onSwap: (newItemNam
 }
 
 const MealCard = ({ meal, onSwapItem, pricingData }: { meal: Meal, onSwapItem: (mealName: string, itemIndex: number, newItemName: string) => void, pricingData: PricingData }) => {
-  
+
   const findPrice = (foodName: string) => {
     const key = Object.keys(pricingData).find(k => foodName.toLowerCase().includes(k));
     return key ? pricingData[key] : null;
@@ -127,7 +127,39 @@ export function MealPlanDisplay({ plan: initialPlan }: MealPlanDisplayProps) {
   }, []);
 
   const sensors = useSensors(useSensor(PointerSensor));
-  
+
+  const [isExporting, setIsExporting] = React.useState(false);
+
+  const exportToPdf = async () => {
+    setIsExporting(true);
+    try {
+      const response = await fetch("http://localhost:8000/api/v1/planner/export-pdf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(plan),
+      });
+
+      if (!response.ok) throw new Error("Export failed");
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "afyaplate_meal_plan.pdf";
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (err) {
+      console.error("PDF Export Error:", err);
+      alert("Failed to export PDF. Please try again.");
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && active.id !== over.id) {
@@ -150,15 +182,15 @@ export function MealPlanDisplay({ plan: initialPlan }: MealPlanDisplayProps) {
       return newPlan;
     });
   };
-  
+
   const totalCost = React.useMemo(() => {
     let cost = 0;
     plan.meals.forEach(meal => {
       meal.items.forEach(item => {
         const key = Object.keys(pricingData).find(k => item.food_name.toLowerCase().includes(k));
-        if(key) {
+        if (key) {
           const priceInfo = pricingData[key];
-          if(priceInfo.unit === 'piece') {
+          if (priceInfo.unit === 'piece') {
             const quantity = parseInt(item.quantity.split(' ')[0]) || 1;
             cost += priceInfo.price * quantity;
           }
@@ -172,7 +204,12 @@ export function MealPlanDisplay({ plan: initialPlan }: MealPlanDisplayProps) {
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={plan.meals.map(m => m.meal_name)} strategy={rectSortingStrategy}>
         <div className="mt-12 w-full">
-          <h2 className="text-3xl font-bold text-center mb-8">Your Daily Meal Plan</h2>
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-3xl font-bold">Your Daily Meal Plan</h2>
+            <Button onClick={exportToPdf} disabled={isExporting} variant="default" className="bg-primary text-white">
+              {isExporting ? "Exporting..." : "Download PDF"}
+            </Button>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {plan.meals.map((meal) => (
               <SortableMealCard key={meal.meal_name} meal={meal} onSwapItem={handleSwapItem} pricingData={pricingData} />
@@ -189,7 +226,7 @@ export function MealPlanDisplay({ plan: initialPlan }: MealPlanDisplayProps) {
                   <p className="font-semibold text-lg">{plan.daily_summary.total_calories}</p>
                   <p className="text-sm text-muted-foreground">Total Calories</p>
                 </div>
-                 <div>
+                <div>
                   <p className="font-semibold text-lg text-primary">KES {totalCost.toFixed(2)}</p>
                   <p className="text-sm text-muted-foreground">Est. Daily Cost</p>
                 </div>

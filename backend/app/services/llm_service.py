@@ -73,10 +73,11 @@ async def generate_meal_plan(request: PlannerRequest) -> PlannerResponse:
     # Use google-genai for Gemini
     if request.llm_provider.lower() == "gemini":
         try:
+            # Use the async client
             client = genai.Client(api_key=request.llm_api_key)
             model_id = request.llm_model if "gemini" in request.llm_model else "gemini-2.0-pro-exp-02-05"
             
-            response = client.models.generate_content(
+            response = await client.aio.models.generate_content(
                 model=model_id,
                 contents=[user_prompt],
                 config=types.GenerateContentConfig(
@@ -90,6 +91,7 @@ async def generate_meal_plan(request: PlannerRequest) -> PlannerResponse:
             
         except Exception as e:
             logger.error(f"Google GenAI error: {e}")
+            # Pass through the error detail for better debugging in the UI
             raise ValueError(f"Gemini API error: {str(e)}")
 
     # Fallback/LiteLLM for other providers
