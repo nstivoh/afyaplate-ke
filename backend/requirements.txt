@@ -6,3 +6,9 @@ python-dotenv
 redis
 groq
 httpx
+pandas
+numpy
+rapidfuzz
+sqlalchemy
+litellm
+google-genai

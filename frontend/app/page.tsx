@@ -1,4 +1,6 @@
 import { FoodSearch } from "@/components/food-search";
+import Link from 'next/link';
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -10,6 +12,13 @@ export default function Home() {
         <p className="mt-4 text-lg text-muted-foreground">
           Your Kenyan Nutrition Partner.
         </p>
+        <div className="mt-8 flex justify-center gap-4">
+          <Link href="/planner">
+            <Button size="lg" className="rounded-full px-8 text-lg shadow-lg">
+              Get Started
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className="mt-16 w-full">
         <FoodSearch />

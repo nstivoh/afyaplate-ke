@@ -1,7 +1,8 @@
-import httpx
 import json
 import logging
-from app.core.config import settings
+from google import genai
+from google.genai import types
+from litellm import acompletion
 from app.schemas.planner import PlannerRequest, PlannerResponse
 
 logging.basicConfig(level=logging.INFO)
@@ -69,47 +70,51 @@ async def generate_meal_plan(request: PlannerRequest) -> PlannerResponse:
     if request.carb_grams:
         user_prompt += f" - Target Carbs: {request.carb_grams}g\n"
 
-    headers = {
-        "Authorization": f"Bearer {settings.LLM_API_KEY}",
-        "Content-Type": "application/json",
-    }
-    data = {
-        "model": settings.LLM_MODEL,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_prompt},
-        ],
-        "temperature": 0.7,
-        "response_format": {"type": "json_object"},
-    }
-
-    async with httpx.AsyncClient() as client:
+    # Use google-genai for Gemini
+    if request.llm_provider.lower() == "gemini":
         try:
-            response = await client.post(
-                settings.LLM_BASE_URL + "/chat/completions",
-                headers=headers,
-                json=data,
-                timeout=30.0,
+            client = genai.Client(api_key=request.llm_api_key)
+            model_id = request.llm_model if "gemini" in request.llm_model else "gemini-2.0-pro-exp-02-05"
+            
+            response = client.models.generate_content(
+                model=model_id,
+                contents=[user_prompt],
+                config=types.GenerateContentConfig(
+                    system_instruction=SYSTEM_PROMPT,
+                    response_mime_type="application/json"
+                )
             )
-            response.raise_for_status()
             
-            response_json = response.json()
-            content = response_json["choices"][0]["message"]["content"]
+            plan_data = json.loads(response.text)
+            return PlannerResponse(**plan_data)
             
-            # The content should be a JSON string, so we parse it.
-            plan_data = json.loads(content)
-            
-            # Validate with Pydantic model
-            validated_plan = PlannerResponse(**plan_data)
-            return validated_plan
-
-        except httpx.HTTPStatusError as e:
-            logger.error(f"HTTP error occurred: {e.response.text}")
-            raise
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to decode JSON from LLM response: {content}")
-            raise
         except Exception as e:
-            logger.error(f"An unexpected error occurred in Groq service: {e}")
-            raise
+            logger.error(f"Google GenAI error: {e}")
+            raise ValueError(f"Gemini API error: {str(e)}")
+
+    # Fallback/LiteLLM for other providers
+    litellm_model = f"{request.llm_provider}/{request.llm_model}"
+
+    try:
+        response = await acompletion(
+            model=litellm_model,
+            api_key=request.llm_api_key,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.7,
+            response_format={"type": "json_object"},
+        )
+        
+        content = response.choices[0].message.content
+        plan_data = json.loads(content)
+        return PlannerResponse(**plan_data)
+
+    except json.JSONDecodeError as e:
+        logger.error(f"Failed to decode JSON from LLM response: {content}")
+        raise ValueError("The AI model failed to return a valid JSON object.") from e
+    except Exception as e:
+        logger.error(f"LiteLLM completion error: {e}")
+        raise
 

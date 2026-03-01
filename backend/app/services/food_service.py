@@ -1,59 +1,65 @@
-# backend/app/services/food_service.py
-import pandas as pd
-from rapidfuzz import process, fuzz
-from pathlib import Path
+import logging
 from typing import List, Optional
 
+from sqlalchemy.orm import Session
+from sqlalchemy import or_
+
 from app.models.food import Food
+from app.db.database import SessionLocal
+from app.models.sql_models import SQLFood
+
+logger = logging.getLogger(__name__)
 
 class FoodService:
-    _instance = None
-    _food_df = None
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(FoodService, cls).__new__(cls)
-            cls._instance._load_data()
-        return cls._instance
-
-    def _load_data(self):
-        """Loads and prepares the food data from the CSV."""
-        if self._food_df is None:
-            data_path = Path(__file__).resolve().parents[3] / "data" / "kfct_clean.csv"
-            try:
-                df = pd.read_csv(data_path)
-                # Prepare a display name
-                df['display_name'] = df['food_name_english'].fillna('') + " (" + df['food_name_swahili'].fillna('') + ")"
-                self._food_df = df
-            except FileNotFoundError:
-                # In a real app, you'd have more robust error handling or logging
-                print(f"Error: Food data file not found at {data_path}")
-                self._food_df = pd.DataFrame()
+    def __init__(self):
+        pass
 
     def search(self, query: Optional[str] = None, category: Optional[str] = None, limit: int = 20) -> List[Food]:
         """
-        Searches and filters the food data.
+        Searches and filters the food data using SQLite.
         """
-        if self._food_df.empty:
-            return []
+        db: Session = SessionLocal()
+        try:
+            sql_query = db.query(SQLFood)
 
-        df = self._food_df.copy()
+            if category:
+                sql_query = sql_query.filter(SQLFood.category == category)
 
-        if category:
-            df = df[df['category'].str.lower() == category.lower()]
+            if query:
+                search_term = f"%{query}%"
+                sql_query = sql_query.filter(
+                    or_(
+                        SQLFood.display_name.ilike(search_term),
+                        SQLFood.food_name_english.ilike(search_term),
+                        SQLFood.food_name_swahili.ilike(search_term),
+                        SQLFood.category.ilike(search_term)
+                    )
+                )
 
-        if query:
-            searchable_series = df['display_name'].fillna('')
-            extracted_matches = process.extract(query, searchable_series, scorer=fuzz.WRatio, limit=limit*2)
+            # Limit results
+            results = sql_query.limit(limit).all()
             
-            matched_indices = [index for _, _, index in extracted_matches if _ > 70]
-            df = df.loc[matched_indices]
-
-        # Limit results and convert to Pydantic models
-        results = df.head(limit).to_dict(orient='records')
-        return [Food(**record) for record in results]
+            # Convert SQLAlchemy models to Pydantic models
+            return [Food.model_validate(record) for record in results]
+        
+        except Exception as e:
+            logger.error(f"Error querying foods: {e}")
+            return []
+        finally:
+            db.close()
 
     def get_all_categories(self) -> List[str]:
-        if self._food_df.empty:
+        """
+        Returns a distinct list of all categories in the database.
+        """
+        db: Session = SessionLocal()
+        try:
+            # Query distinct categories where category is not null
+            categories = db.query(SQLFood.category).filter(SQLFood.category.isnot(None)).distinct().all()
+            # Extract the string values from the keyed tuple returned by SQLAlchemy
+            return sorted([cat[0] for cat in categories if cat[0]])
+        except Exception as e:
+            logger.error(f"Error querying categories: {e}")
             return []
-        return sorted(self._food_df['category'].unique().tolist())
+        finally:
+            db.close()
