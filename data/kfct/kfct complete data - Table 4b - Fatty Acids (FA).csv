@@ -1,0 +1,29 @@
+code,food_name,fat_total_g,facid_g,fasat_g,fams_g,fapu_g,fatrn_g,faun_g,fapun3_g,fapun6_g
+01018,"Maize, grain, white variety, whole, dry, raw",4.5,3.58,17,36.9,44,0.1,2.01,0.99,43
+01020,"Maize meal, sifted, fortified, packaged, raw",3,2.39,18.5,40,41.4,0.18,0,1.09,40.3
+01023,"Green Maize, white, whole, grain, fresh, raw",2.5,2.3,19.7,37.3,43,0.14,0,1.06,41.9
+01025,"Millet, bulrush, grain, dry, raw",5.3,4.56,23.7,29.4,46.7,0.16,0.01,2.88,43.9
+01039,"Sorghum, grain, white, dry, raw",3.5,3.01,19.5,40,43,0.21,0,1.12,41.9
+01034,"Rice, white, milled, polished grain, dry, raw",1,0.85,34.6,37,27.9,0.54,0,1.25,26.6
+01043,"Wheat Flour (refined/fortified/sifted packaged), raw",1.6,1.07,20.3,17.7,61.8,0.18,0,3.75,58
+01045,"Wheat, whole, grain, dry, raw",2.5,1.8,20.1,20.4,59.3,0.12,0.08,4.28,55.1
+03004,"Beans, kidney, dry, raw",2,1.6,16.1,11,72.5,0.43,0.02,49.1,23.4
+03015,"Garden peas, fresh, raw",0.7,0.56,28.2,28.4,46.7,0.79,0,7.62,39.1
+03017,"Gram, black, dry, raw",1.7,1.36,34.8,12.8,56.5,0.28,0,35.8,20.7
+05003,"Avocado, ripe, raw",19.6,18.7,17.5,72.2,10.2,0.05,0.02,0.69,9.53
+06022,"Milk, cow, whole, fresh, raw",3.5395,3.45,67.4,25.7,2.49,4.47,0,1.01,2.54
+06020,"Milk, cow, whole, fermented (Lala - Industrial)",4.0915,2.73,65.7,26.1,3.06,5.1,0,1.41,2.62
+06021,"Milk, cow, whole, fermented (Lala - mursik)",3.515,3.34,63.3,29,2.84,4.79,0,1.5,2.54
+06026,"Yoghurt, cow milk, whole, plain",3.0945,2.65,65.7,26.5,2.74,5.01,0.11,1.08,2.72
+06014,"Milk, camel, whole, fresh, raw",2.828,2.69,58.4,33.1,3.88,4.52,0.1,1.84,3.34
+07011,"Egg, chicken, whole, raw",8.1355,7,32.9,41.8,25.4,0,0,1.63,23.8
+07022,"Sausage, beef, raw",16.279,16.2,45.6,37.6,14,2.85,0,1.18,13.4
+07001,"Beef, high fat, w/o bones, raw",24.08,22.9,54,38,3.49,4.47,0.13,1.7,2.7
+07004,"Beef, medium fat, w/o bones, raw",7.21,6.82,52.1,40.3,3.3,4.26,0,1.47,2.71
+07002,"Beef, lean, raw",2.265,2.09,53.8,35.6,7.18,3.35,0,1.91,6.22
+07016,"Goat, medium fat, raw",8.615,8.17,53.8,36.2,5.2,4.72,0.12,1.84,4.59
+07014,"Goat, lean, raw",4.28,4.06,51.2,38,5.92,4.69,0.25,1.48,5.67
+07009,"Chicken, unespecified part, w/o bones, meat&skin, raw",12.98,12.3,30.1,46.3,23.2,0.41,0,1.14,22.2
+07003,"Beef, liver, raw",4.2,3.11,46.1,17,34.4,2.52,0,13.4,21.4
+08010,"Nile tilapia, fillet, w/o skin and bones, raw",1.49,1.25,34.2,33.8,32,0,0,7.9,24.1
+08005,"Lungfish, fillet, raw",1.025,0.81,37.1,28.6,34.3,0,0,17.1,17.1

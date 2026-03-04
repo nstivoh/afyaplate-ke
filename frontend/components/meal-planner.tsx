@@ -278,6 +278,7 @@ export function MealPlannerForm() {
                             <SelectItem value="anthropic">Anthropic (Claude)</SelectItem>
                             <SelectItem value="groq">Groq</SelectItem>
                             <SelectItem value="qwen">Qwen</SelectItem>
+                            <SelectItem value="algorithmic">Algorithmic Planner (Free / Offline)</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>

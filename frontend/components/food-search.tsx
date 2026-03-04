@@ -11,7 +11,8 @@ import { FoodCard } from "./food-card";
 const fuseOptions = {
   keys: [
     "food_name_english",
-    "food_name_swahili"
+    "food_name_swahili",
+    "display_name"
   ],
   threshold: 0.3,
 };
@@ -25,7 +26,7 @@ export function FoodSearch() {
   React.useEffect(() => {
     async function loadFoods() {
       try {
-        const foods = await searchFoods("", 1000); 
+        const foods = await searchFoods("", 1000);
         setAllFoods(foods);
         fuseRef.current = new Fuse(foods, fuseOptions);
         setResults(foods.slice(0, 12)); // Show some initial results
@@ -58,8 +59,8 @@ export function FoodSearch() {
         className="w-full text-lg p-6 rounded-full glassmorphism"
       />
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {results.map((food) => (
-          <FoodCard key={food.food_code} food={food} />
+        {results.map((food, idx) => (
+          <FoodCard key={`${food.food_code}-${idx}`} food={food} />
         ))}
       </div>
     </div>

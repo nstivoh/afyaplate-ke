@@ -1,0 +1,39 @@
+code,food_name,scientific_name,oxalic_acid_mg
+01017,"Maize, grain, white variety, whole, dry, raw",Zea mays,0
+01019,"Maize meal, sifted, fortified, packaged, raw",,0
+01022,"Green Maize, white, whole, grain, fresh, raw",Zea mays,12
+01024,"Millet, bulrush, grain, dry, raw",Pennisetum glaucum,18
+01031,"Rice, white, milled, polished grain, dry, raw",Oryza sativa,0
+01033,"Sorghum, Grain, Red, Dried, Raw",Sorghum bicolor,0
+01035,"Sorghum, grain, white, dry, raw",Sorghum bicolor,0
+01037,"Wheat Flour (refined/fortified/sifted packaged), raw",Triticum aestivum,0
+02008,"Potato, Irish (English), white variety, peeled, raw",Solanum tuberosum L.,14
+03004,"Beans, Kidney, dry, raw",Phaseolus vulgaris var. Kidney,0
+04001,"Amaranth, leaves, picked, raw",Amaranthus gangeticus,323
+04003,"Black (African) nightshade, indigenous, leaves, picked, raw",Solanum scabrum,18
+04007,"Cabbage, leaf head, white, raw",Brassica oleracea var. capitata,0
+04011,"Carrot, peeled, raw",Daucus carota,15
+04015,"Cowpea, leaves, picked, raw",Vigna unguiculata,16
+04018,"Jute mallow, picked leaves, raw",Corchorus olitorius,59
+04019,"Kale, Ethiopian (kanzera), leaves, raw",Brassica carinata,13
+04020,Kale (sukuma wiki) raw,Brassica oleracea var. acephala,18
+04027,"Pumpkin, flesh, yellow w/o seeds, raw",Cucubita maxima,0
+04031,"Spinach, Swiss chard, leaves, raw",Beta vulgaris ssp. vulgaris,819
+04032,"Squash, butternut, peeled, flesh, raw",Cucurbita moschata,0
+04035,"Tomato, red, ripe, raw",Solanum lycopersicum,14
+04037,"Vine (African) spinach, picked leaves, raw",Basella alba,278
+05004,"Banana, cavendish, raw",Musa spp.,0
+05005,"Baobab fruit, powderly part, dry, raw",Adansonia digitata,24
+05011,"Guava, pink-fleshed, raw",Psidium guajava,42
+05012,"Jackfruit, fruit, yellow-fleshed, peeled, raw",Artocarpus heterophyllus,0
+05017,"Loquat, peeled, raw",Eriobotrya japonica,0
+05022,"Orange, pulp, raw",Citrus sinensis,19
+05023,"Papaya, yellow skin, peeled, raw",Carica papaya,29
+05024,"Passion fruit, dark purple skin, raw",Passiflora edulis,0
+05029,"Pineapple, raw",Ananas comosus,0
+05036,"Tree tomato, dark red skin, peeled, raw",Solanum betaceum,14
+05037,"Watermelon, fruit, green with white stripes, raw",Citrullus lanatus,0
+10005,"Jack fruit, seed, mature, dry, raw",Artocarpus heterophyllus,0
+10008,"Nut, ground nut, with skin, unsalted, dry, raw",Arachis hypogaea,14
+10009,"Nut, macadamia, raw, unsalted",Macadamia F. Muell,0
+10012,"Seed, sesame (sim sim) unsalted, dry, raw",Sesamum indicum,22

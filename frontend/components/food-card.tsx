@@ -23,7 +23,7 @@ export function FoodCard({ food }: FoodCardProps) {
     return ((value / 100) * portionSize).toFixed(1);
   };
 
-  const calories = (food.energy_kcal / 100 * portionSize).toFixed(0);
+  const calories = ((food.energy_kcal || 0) / 100 * portionSize).toFixed(0);
 
   return (
     <Card className="glassmorphism flex flex-col">
@@ -34,22 +34,38 @@ export function FoodCard({ food }: FoodCardProps) {
         <p className="text-sm text-muted-foreground">{food.food_name_swahili}</p>
       </CardHeader>
       <CardContent className="flex-grow">
-        <div className="grid grid-cols-2 gap-4 text-sm">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
           <div>
-            <p className="font-semibold">Calories</p>
+            <p className="font-semibold text-secondary">Calories</p>
             <p>{calories ?? "N/A"} kcal</p>
           </div>
           <div>
-            <p className="font-semibold">Protein</p>
+            <p className="font-semibold text-secondary">Protein</p>
             <p>{calculateNutrient(food.protein_g)} g</p>
           </div>
           <div>
-            <p className="font-semibold">Carbs</p>
+            <p className="font-semibold text-secondary">Carbs</p>
             <p>{calculateNutrient(food.carbs_g)} g</p>
           </div>
           <div>
-            <p className="font-semibold">Fat</p>
+            <p className="font-semibold text-secondary">Fat</p>
             <p>{calculateNutrient(food.fat_g)} g</p>
+          </div>
+          <div>
+            <p className="font-semibold text-tertiary">Fibre</p>
+            <p>{calculateNutrient(food.fibre_g)} g</p>
+          </div>
+          <div>
+            <p className="font-semibold text-tertiary">Calcium</p>
+            <p>{calculateNutrient(food.calcium_mg)} mg</p>
+          </div>
+          <div>
+            <p className="font-semibold text-tertiary">Iron</p>
+            <p>{calculateNutrient(food.iron_mg)} mg</p>
+          </div>
+          <div>
+            <p className="font-semibold text-tertiary">Zinc</p>
+            <p>{calculateNutrient(food.zinc_mg)} mg</p>
           </div>
         </div>
         <div className="mt-4">

@@ -1,21 +1,22 @@
 // frontend/services/plannerService.ts
-import { PlannerRequest, PlannerResponse } from "@/types/planner";
-import { fetchWithRetry } from "@/lib/fetchWithRetry";
+import { PlannerRequest, PlannerResponse } from '@/types/planner';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/v1";
+const API_BASE_URL = 'http://localhost:8000/api/v1';
 
-export async function generateMealPlan(request: PlannerRequest): Promise<PlannerResponse> {
-  const response = await fetchWithRetry(`${API_BASE_URL}/planner/generate`, {
-    method: "POST",
+export async function generateMealPlan(params: MealPlanParams): Promise<PlannerResponse> {
+  const isAlgo = params.llm_provider.toLowerCase() === 'algorithmic';
+  const endpoint = isAlgo ? '/planner/generate-algorithmic' : '/planner/generate';
+
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(request),
+    body: JSON.stringify(params),
   });
 
   if (!response.ok) {
-    const errorData = await response.json().catch(() => ({ detail: "Failed to generate meal plan." }));
-    throw new Error(errorData.detail);
+    throw new Error('Failed to generate meal plan');
   }
 
   return response.json();

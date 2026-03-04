@@ -1,0 +1,89 @@
+code,food_name,cholesterol_mg
+01003,"Biscuit, savoury",4
+01004,"Biscuit, sweet",12
+01011,"Buns, currant",1.5
+01012,"Cake or cupcake, plain butter cake, commercial",82.5
+01013,"Cake, fruit",38
+01014,"Cake, sponge, homemade",161
+01015,"Cake, sponge, without fat",203
+01016,Cakes (various fancy iced),31.1
+01036,"Scone, plain, commercial",11
+06001,"Butter (cow milk), no added salt (~80-84% fat)",167
+06002,"Butter (cow milk), salted (~80% fat)",167
+06003,"Cheese, cheddar, regular fat",108
+06004,"Cheese, cottage (cow milk), plain, skimmed",10
+06005,"Cheese, cottage (cow milk), plain, whole",22
+06006,"Cheese, cottage, milk, cow, sour",17
+06007,"Cream, pure, 35% fat",72
+06008,Ghee (cow milk),290
+06009,"Ice cream, caramel flavour, regular fat",35
+06010,"Ice cream, chocolate flavour, regular fat",42
+06011,"Ice cream, strawberry flavour, regular fat",32
+06012,"Ice cream, vanilla flavour, regular fat",35
+06013,"Ice cream, vanilla flavour, with nuts, regular fat",34
+06014,"Milk, camel, whole, fresh, raw",9
+06015,"Milk, cow, condensed, skimmed, sweetened, raw",8
+06016,"Milk, cow, condensed, whole, sweetened, raw",31
+06017,"Milk, cow, powder, skimmed",26
+06018,"Milk, cow, powder, whole",90
+06019,"Milk, cow, skimmed, raw",3
+06020,"Milk, cow, whole, fermented (lala - industrial)",11
+06021,"Milk, cow, whole, fermented (lala - mursik)",6
+06022,"Milk, cow, whole, fresh, raw",14
+06023,"Milk, goat, fluid, whole, raw",9
+06024,"Milk, human/breast, mature, fluid",14
+06025,"Milk, sheep, fluid, whole, raw",12
+06026,"Yoghurt, cow milk, whole, plain",9
+07001,"Beef, high fat, w/o bones, raw",79
+07002,"Beef, lean, raw",62
+07003,"Beef, liver, raw",262
+07004,"Beef, medium fat, w/o bones, raw",63
+07005,"Camel blood, raw",45
+07006,"Camel meat, raw",99
+07009,"Chicken, unespecified part, w/o bones, meat&skin, raw",99
+07010,"Egg, chicken, white (albumen), raw",0
+07011,"Egg, chicken, whole, raw",418
+07012,"Egg, chicken, yolk, raw",1050
+07013,"Goat blood, raw",93
+07014,"Goat, lean, raw",415
+07015,"Goat liver, raw",93
+07016,"Goat, medium fat, raw",87
+07017,"Guinea fowl, meat, with skin",389
+07018,"Lamb liver, raw",72
+07019,"Lamb, raw (unspecified part)",74
+07020,"Pork, meat, raw (unspecified part)",67
+07021,"Rabbit meat, raw",34
+07022,"Sausage, beef, raw",48
+07023,"Sausage, frankfurters",158
+07024,"Sausage, liver, raw",65
+07025,"Sausage, pork, raw",88
+07026,"Quail, flesh & skin, raw",49
+08001,"Cod, fillet, raw",977
+08002,"Dagaa fish (omena), dried, raw",126
+08003,"Eel, raw",62
+08004,"Herring stock, raw",61
+08005,"Lungfish, fillet, raw",37
+08006,"Mudfish (kamongo), fillet, raw",60
+08007,"Mackerel, raw",75
+08009,"Nile perch, fillet w/o bones, raw",63
+08010,"Nile tilapia, fillet, w/o skin and bones, raw",195
+08011,"Prawns, flesh, raw",49
+08012,"Sardine, flesh, raw",24
+08013,"Shark, raw",37
+08014,"Tuna, raw",95
+09001,Animal fat/ lard,570
+09003,Fish liver oil,0
+09004,"Margarine, 20% fat",0.67
+09005,"Margarine, 60% fat",25
+09006,"Margarine, 80% fat",2
+15001,Uji wa mahindi (maize porridge),2
+15002,"Sorghum, finger millet and maize porridge",0
+15003,Kaimati (fried dumplings),0
+15004,Mahamri (swahili doughnuts),0
+15005,Whole maize flour ugali,0
+15006,Maize and finger millet flour ugali,0
+15007,"Maize, red sorghum and finger millet ugali",0
+15008,Cassava and red sorghum ugali,0
+15009,Refined maize flour ugali,0
+15010,"Sorghum, maize flour & finger millet ugali",0
+15011,Cassava flour ugali,0

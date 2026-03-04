@@ -57,11 +57,27 @@ You MUST respond with only a valid JSON object that strictly adheres to the sche
 """
 
 async def generate_meal_plan(request: PlannerRequest) -> PlannerResponse:
+    # 1. Fetch DB Context
+    from app.db.database import SessionLocal
+    from app.models.sql_models import SQLFood
+    import random
+
+    db_context_list = ""
+    with SessionLocal() as db:
+        foods = db.query(SQLFood).all()
+        # Random sample so the LLM gets variety on different runs, up to 150 items
+        sampled_foods = random.sample(foods, min(150, len(foods)))
+        food_names = [f.food_name_english or f.food_name_swahili or f.display_name for f in sampled_foods if f]
+        db_context_list = ", ".join(filter(None, food_names))
+
     user_prompt = f"""
     Please generate a meal plan with the following requirements:
     - Target Calories: {request.target_calories}
     - Number of Meals: {request.num_meals}
     - Dietary Restrictions: {', '.join(request.dietary_restrictions) if request.dietary_restrictions else 'None'}
+    
+    CRITICAL: You must ONLY select foods from the following Kenyan Food Composition Database list:
+    [{db_context_list}]
     """
     if request.protein_grams:
         user_prompt += f" - Target Protein: {request.protein_grams}g\n"
@@ -73,9 +89,11 @@ async def generate_meal_plan(request: PlannerRequest) -> PlannerResponse:
     # Use google-genai for Gemini
     if request.llm_provider.lower() == "gemini":
         try:
+            import os
+            api_key_to_use = request.llm_api_key if request.llm_api_key and request.llm_api_key != "********************" else os.getenv("GEMINI_API_KEY")
             # Use the async client
-            client = genai.Client(api_key=request.llm_api_key)
-            model_id = request.llm_model if "gemini" in request.llm_model else "gemini-2.0-pro-exp-02-05"
+            client = genai.Client(api_key=api_key_to_use)
+            model_id = request.llm_model if "gemini" in request.llm_model else "gemini-2.5-pro"
             
             response = await client.aio.models.generate_content(
                 model=model_id,

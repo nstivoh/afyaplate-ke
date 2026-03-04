@@ -1,0 +1,514 @@
+code,food_name,ca_mg,fe_mg,mg_mg,p_mg,k_mg,na_mg,zn_mg,se_mcg
+01001,"Amaranth, whole grain, dry, raw",162,9.5,270,397,413,3,2.5,21
+01002,"Amaranth, whole grain, flour",161,8.9,259,405,461,3,2.7,20
+01003,"Biscuit, Savoury",38,1.4,27,177,161,637,0.83,15
+01004,"Biscuit, Sweet",45,1.4,19,98,158,298,0.6,10
+01005,"Bread, Brown",56,2.6,58,134,191,446,1.3,13
+01006,"Bread, Sweet",80,1.9,18,147,227,369,0.8,20
+01007,"Bread, White",37,1.7,27,95,120,466,0.8,10
+01008,"Breakfast cereal, flakes of corn, fortified",3.2,10.2,13,45,110,1090,0.2,5.5
+01009,"Breakfast cereal, flakes of corn",3,0.4,13,45,110,1090,0.2,9
+01010,"Breakfast cereal, wheat biscuits, Weetabix type",30,7.6,125,308,392,360,2,5.1
+01011,"Buns, Currant",90,2.5,27,100,210,100,0.6,9
+01012,"Cake or cupcake, plain butter cake, commercial",63,1,14,310,110,480,0.5,7
+01018,"Maize, grain, white variety, whole, dry, raw",24,2.6,75,367,226,12,1.88,8
+01046,"Amaranth, whole grain, dry, stewed (without salt)",56,3.2,91,133,139,3,0.85,7
+01047,"Maize, grain, white variety, whole, dry, boiled, drained (without salt)",9,0.8,25,112,59,5,0.58,3
+02001,"Arrowroot, flour",33,1,4,7,11,2,0.57,0
+02002,"Arrowroot, peeled, raw",6,1.1,25,43,685,36,1,1
+02003,"Banana, BITA 3, dried, flour",30,1.2,60,100,1030,4,0.62,4
+02004,"Banana, plantain, green, raw",7,0.8,23,29,322,10,0.23,1
+02005,"Beet root, peeled, raw",13,0.8,11,36,298,60,0.55,0
+02007,"Cassava, root, white, peeled, raw",33,0.9,13,21,250,2,0.34,1
+02008,"Cassava, root, yellow, peeled, raw",18,0.6,9,27,290,2,0.34,1
+02009,"Potato, Irish (English), white variety, peeled, raw",9,1.4,19,81,645,6.46,0.32,1
+02013,"Sweet potato, brown skin, peeled, raw",22,0.4,12,25,389,20,0.28,0
+02014,"Sweetpotato, orange, biofortified, raw",27,0.5,14,33,250,10,0.5,1
+03001,"Beans, broad, dry, raw",96,5.19,135,431,1190,25,3.55,8
+03002,"Beans, broad, fresh, raw",26,1.6,29,427,275,2,1.1,8
+03004,"Beans, kidney, dry, raw",106,6.4,103,600,872,22,2.78,4
+03011,"Cowpeas, dry, raw",112,5.97,322,276,1380,22,3.37,0
+03013,"Flour, soya, full fat",200,6.25,421,484,2470,12.7,3.84,7
+04001,"Amaranth, leaves, picked, raw",280,6.8,122,89,597,18,0.92,22
+04002,"Bitter gourd, whole, different varieties, raw",22,1.4,20,51,210,16,0.37,5
+04003,"Black (African) nightshade, indigenous, leaves, picked, raw",100,8.6,41,68,421,10,0.65,1
+04004,"Broccoli, tops and stems, raw",66,0.8,21,75,336,22,1,1
+04005,"Cabbage, leaf head, Chinese, raw",36,1.4,10,40,250,16,0,1
+04006,"Cabbage, leaf head, red raw",45,0.7,29,14,241,16,0.3,1
+04007,"Cabbage, leaf head, white, raw",47,0.5,9,40,313,37,0.2,1
+04008,"Capsicum (sweet peper), green, raw",8,0.5,10,17,151,2,0.18,0
+04009,"Capsicum (sweet peper), red, raw",4,0.3,6,24,174,2,0.2,1
+04010,"Capsicum (sweet peper), yellow, raw",19,1,17,43,242,2,0,0
+04011,"Carrot, peeled, raw",33,0.6,17,25,251,35,0.14,0
+04012,"Cauliflower, tops and stems, raw",17,0.8,11,49,292,30,0,1
+04013,"Celery, stalk, raw",70,1,19,50,267,28,0.21,2
+04014,"Courgette, green, unpeeled, raw",18,0.5,16,34,188,1,0.33,1
+04015,"Cowpea, leaves, picked, raw",188,2.7,47,17,485,31,1,1
+04016,"Cucumber, green, unpeeled, raw",20,0.7,14,20,136,22,0.18,1
+04017,"Eggplant / Brinjal, different varieties, whole edible, raw",18,0.4,21,35,200,3,0.21,1
+04018,"Jute mallow, picked leaves, raw",207,6.3,30,88,283,18,0.58,1
+04019,"Kale, Ethiopian (kanzera), leaves, raw",117,5.7,54,51,639,7,0.7,0
+04020,Kale (sukuma wiki) raw,402,2.8,41,67,238,71,0.5,0
+04021,"Leeks, bulb and stem, raw",78,1.8,14,54,202,17,0.3,1
+04022,"Lettuce, not further defined, raw",47,1.6,24,55,201,20,0.26,1
+04023,"Mushroom, fresh, raw",16,0.3,15,105,318,8,0.17,16
+04024,"Mushroom, dried, raw",24,5.5,136,702,326,5,8.7,0
+04025,"Mushroom, raw, canned in brine (drained)",4,1,4,54,24,300,0,16
+04026,"Okra, fresh, raw",81,0.8,57,63,303,8,0.6,1
+04027,"Pumpkin, flesh, yellow w/o seeds, raw",17,0.2,12,31,178,14,0.21,1
+04028,"Pumpkin, leaves, raw",383,5.6,142,119,423,12,0.9,1
+04029,"Spider plant, leaves, raw",189,2.6,48,49,478,19,0.76,2
+04030,"Spinach, leaves, raw",131,1.7,72,28,570,59,1,1
+04031,"Spinach, Swiss chard, leaves, raw",117,4.4,78,50,348,892,0.73,1
+04032,"Squash, butternut, peeled, flesh, raw",18,1,16,19,332,7.7,0.2,1
+04033,"Stinging nettle, leaves, raw",668,7.2,133,122,524,36,1,2
+04034,Sweet Potato (Leaves),118,1,61,30,620,6,0.29,1
+04035,"Tomato, green, raw",8,0.4,14,23,225,13,0.2,8
+04036,"Tomato, red, ripe, raw",8,0.9,9.5,25,126,21,0.37,0
+04037,"Tomato, canned, whole contents",22,0.6,11,20,204,68,0.16,1
+04038,"Vine (African) spinach, picked leaves, raw",267,10.9,40,56,446,8,0.5,0
+04039,"Amaranth, leaves, picked, boiled, drained (without salt)",280,5.3,77,84,314,14,0.73,20
+04040,"Amaranth, leaves, picked, stewed (without salt)",346,8.3,151,110,737,22,1.14,27
+04041,"Bitter gourd, whole, different varieties, boiled, drained (without salt)",23,1.2,13,51,117,14,0.31,5
+04042,"Black (African) nightshade, indigenous, leaves, picked, boiled, drained (without salt)",91,6.2,24,58,200,7,0.46,1
+04044,"Broccoli, tops and stems, boiled, drained (without salt)",56,0.6,11,61,151,15,0.41,0
+04045,"Broccoli, tops and stems, steamed (without salt)",60,0.6,18,69,275,18,0.52,0
+04046,"Cabbage, leaf head, Chinese, boiled, drained (without salt)",35,1.1,6,37,128,12,0.15,0
+04047,"Cabbage, leaf head, Chinese, steamed (without salt)",35,1.2,9,39,217,14,0.18,0
+04048,"Cabbage, leaf head, red, boiled, drained (without salt)",44,0.5,18,13,123,12,0.23,1
+04049,"Cabbage, leaf head, red, stewed (without salt)",42,0.7,27,13,223,15,0.28,1
+04050,"Cabbage, leaf head, white, boiled, drained (without salt)",45,0.4,6,36,159,29,0.18,0
+04051,"Cabbage, leaf head, white, stewed (without salt)",50,0.5,10,43,336,40,0.25,1
+04052,"Capsicum (sweet peper), green, boiled, drained (without salt)",9,0.5,7,18,87,2,0.16,0
+04053,"Capsicum (sweet peper), green, grilled (without salt and fat)",9,0.6,11,18,162,2,0.19,0
+04054,"Capsicum (sweet peper), green, baked (without salt)",8,0.6,10,18,157,2,0.19,0
+04055,"Capsicum (sweet peper), red, boiled, drained (without salt)",4,0.3,4,25,100,2,0.17,1
+04056,"Capsicum (sweet peper), red, grilled (without salt and fat)",4,0.3,6,26,187,2,0.22,1
+04057,"Capsicum (sweet peper), red, baked (without salt)",4,0.3,6,25,181,2,0.21,1
+04058,"Capsicum (sweet peper), yellow, boiled, drained (without salt)",21,0.6,12,45,139,1,0.22,0
+04059,"Capsicum (sweet peper), yellow, grilled (without salt and fat)",21,0.7,19,47,260,2,0.28,0
+04060,"Capsicum (sweet peper), yellow, baked (without salt)",20,0.7,18,45,252,2,0.27,0
+04061,"Carrot, peeled, boiled, drained (without salt)",34,0.5,11,24,120,21,0.11,0
+04062,"Carrot, peeled, stewed (without salt)",35,0.6,17,26,261,37,0.14,0
+04063,"Cauliflower, tops and stems, boiled, drained (without salt)",16,0.6,6,44,146,23,0.19,0
+04064,"Celery, stalk, boiled, drained (without salt)",74,0.8,13,50,148,23,0.18,2
+04065,"Courgette, green, unpeeled, boiled, drained (without salt)",19,0.4,11,34,104,1,0.28,1
+04066,"Cowpea, leaves, picked, boiled, drained (without salt)",170,1.9,27,15,231,22,0.53,0
+04067,"Cowpea, leaves, picked, steamed (without salt)",155,1.9,37,14,358,23,0.58,0
+04068,"Eggplant / Brinjal, different varieties, whole edible, boiled, drained (without salt)",19,0.3,14,34,108,2,0.17,0
+04069,"Eggplant / Brinjal, different varieties, whole edible, stewed (without salt)",23,0.5,26,44,250,4,0.26,1
+04070,"Jute mallow, picked leaves, boiled, drained (without salt)",207,5,19,84,149,14,0.46,1
+04071,"Jute mallow, picked leaves, stewed (without salt)",255,7.8,37,109,349,23,0.72,1
+04072,"Kale, Ethiopian (kanzera), leaves, boiled, drained (without salt)",105,4,31,43,304,5,0.48,0
+04073,"Kale, Ethiopian (kanzera), leaves, steamed (without salt)",96,3.9,42,42,472,5,0.52,0
+04074,"Kale (sukuma wiki), boiled, drained (without salt)",364,2,23,57,113,51,0.34,0
+04075,"Kale (sukuma wiki), steamed (without salt)",332,2,32,55,176,53,0.37,0
+04076,"Leeks, bulb and stem, boiled, drained (without salt)",90,1.6,10,58,110,11,0.27,1
+04077,"Mushroom, fresh, boiled, drained (without salt)",21,0.3,12,129,218,8,0.17,20
+04078,"Mushroom, fresh, stewed (without salt)",20,0.4,19,130,393,10,0.21,20
+04079,"Mushroom, dried, boiled, drained (without salt)",14,2.3,47,361,93,3,3.72,0
+04080,"Okra, fresh, boiled, drained (without salt)",70,0.5,31,52,138,5,0.41,1
+04081,"Okra, fresh, stewed (without salt)",84,0.7,56,65,280,7,0.59,1
+04082,"Pumpkin, flesh, yellow w/o seeds, boiled, drained (without salt)",18,0.2,8,30,97,11,0.17,0
+04083,"Pumpkin, flesh, yellow w/o seeds, boiled, drained (without salt)",15,0.2,11,27,157,12,0.19,0
+04084,"Pumpkin, leaves, boiled, drained (without salt)",347,4,81,102,201,9,0.64,1
+04085,"Pumpkin, leaves, steamed (without salt)",316,3.9,111,98,313,9,0.7,1
+04086,"Spider plant, leaves, boiled, drained (without salt)",171,1.9,27,42,228,13,0.54,2
+04087,"Spider plant, leaves, steamed (without salt)",156,1.8,37,40,353,14,0.59,1
+04088,"Spinach, leaves, boiled, drained (without salt)",131,1.4,45,27,300,46,0.47,0
+04089,"Spinach, leaves, stewed (without salt)",161,2.1,89,35,704,72,0.74,1
+04090,"Spinach, Swiss chard, leaves, boiled, drained (without salt)",117,3.5,49,47,183,704,0.58,1
+04091,"Spinach, Swiss chard, leaves, stewed (without salt)",144,5.4,96,62,430,1101,0.9,1
+04092,"Squash, butternut, peeled, flesh, boiled, drained (without salt)",19,0.8,11,20,186,7,0.16,1
+04093,"Squash, butternut, peeled, flesh, steamed (without salt)",19,0.9,16,21,317,7,0.2,1
+04094,"Squash, butternut, peeled, flesh, baked (without salt)",21,1.2,19,23,390,9,0.23,1
+04095,"Stinging nettle, leaves, boiled, drained (without salt)",604,5.2,76,105,250,26,0.49,2
+04096,"Stinging nettle, leaves, steamed (without salt)",552,5,104,101,387,27,0.54,2
+04097,"Tomato, green, boiled, drained (without salt)",10,0.4,10,26,144,13,0.15,10
+04098,"Tomato, red, ripe, boiled, drained (without salt)",10,0.8,7,28,81,20,0.35,0
+04099,"Vine (African) spinach, picked leaves, boiled, drained (without salt)",267,8.6,25,53,234,6,0.36,0
+05001,"Apple, green skin, unpeeled, raw",6,0.4,4,10,99,2,0.07,1
+05002,"Apple, red, unpeeled, raw",6,0.3,4,9,100,1,0.07,1
+05003,"Avocado, ripe, raw",19,1,25,41,281,7,0.39,0
+05004,"Banana, cavendish, raw",10,0.3,26,37,187,0,0.36,0
+05005,"Baobab fruit, powderly part, dry, raw",283,5,108,56,1613,56,0.88,24
+05006,"Custard apple, peeled, raw",28,0.4,38,22,278,3,0,0
+05007,"Date, dried",82,2.6,50,72,730,14,0.6,3
+05008,"Date, raw",34,0.3,24,28,410,7,0.2,1
+05009,"Doumpalm fruit, raw",73,18,53,45,862,0.47,3.4,0
+05010,"Grapes, green, raw",14,0.3,7.1,24,171,3,0.1,0
+05011,"Guava, pink-fleshed, raw",20,0.4,18,31,334,1,0.26,0
+05012,"Jackfruit, fruit, yellow-fleshed, peeled, raw",35,0,32,23,279,2,0.76,0
+05013,"Lemon, juice, home squeezed",20,0.3,12,10,120,2,0,0
+05014,"Lemon peel, raw",134,0.8,15,12,160,6,0.25,1
+05015,"Lemon, pulp, raw",33,0.3,15,16,120,2,0.1,0
+05016,"Lime, juice",26,0.3,11,20,150,3,0,0
+05017,"Lime, pulp, raw",22,0,11,20,150,3,0.1,0
+05018,"Loquat, peeled, raw",13,0.5,13,20,180,2,0.22,0
+05019,"Mango, ripe, raw",14,0.2,9,17,186,1,0.14,1
+05020,"Mango, unripe, raw",27,0.4,18,15,147,26,0.09,0
+05021,"Mulberry, raw",55,1.2,19,40,310,6,0.2,1
+05022,"Orange, Juice",21,0.7,11,20,146,2,0.08,0
+05023,"Orange, pulp, raw",23,0.2,10,13,165,5,0.05,0
+05024,"Papaya, yellow skin, peeled, raw",21,0.6,28,17,140,4,0.2,0
+05025,"Passion fruit, dark purple skin, raw",10,0.6,28,68,200,19,0.8,1
+05026,"Passion Fruit, juice",13,0.4,21,20,252,10,0.3,0
+05027,"Peach, yellow-fleshed, unpeeled, raw",5,0.3,8,20,203,2,0.11,1
+05028,"Pear, unpeeled, raw",8,0.3,7,11,96,1,0.08,0
+05029,"Pineapple, canned in syrup, whole contents",4,0.4,11,3,80,6,0,1
+05030,"Pineapple, raw",16,0.4,13,8,143,1,0.37,1
+05031,"Plum, purple skin, raw",10,0.4,7,12,158,1,0.1,0
+05032,"Pomegranate, raw",12,0.8,9,37,172,4,0.4,1
+05033,"Raspberry, raw",27,0.8,25,37,156,1,0.32,1
+05034,"Strawberry, raw",19,0.6,8,27,158,3,0.18,1
+05035,"Tangerine, juice, non-commercial",12,0.2,11,20,178,1,0.03,0.1
+05036,"Tangerine, pulp, raw",26,0,17,17,150,2,0.1,1
+05037,"Tree tomato, dark red skin, peeled, raw",56,1,19,51,133,20,0.4,0
+05038,"Watermelon, fruit, green with white stripes, raw",4,0.7,10,20,88,2,0.21,0
+05039,"Zambarau, peeled, raw",44,0.5,17,17,72,11,0.42,1
+06001,"Butter (cow milk), no added salt (~80-84% fat)",15,0,2,20,15,10,0.06,1
+06002,"Butter (cow milk), salted (~80% fat)",17,0.01,2,16,23,776,0.06,1
+06003,"Cheese, cheddar, regular fat",800,0.3,27,478,73,600,3.55,17
+06004,"Cheese, cottage (cow milk), plain, skimmed",60,0.1,8,143,123,450,0.24,6
+06005,"Cheese, cottage (cow milk), plain, whole",89,0.1,8,143,123,277,0.24,6
+06006,"Cheese, cottage, Milk, Cow, Sour",112,0.7,8,180,104,364,0.4,10
+06007,"Cream, pure, 35% fat",39,0.3,4,60,55,40,0,0
+06008,Ghee (cow milk),2,0.2,0,3,5,2,0.01,1
+06009,"Ice cream, caramel flavour, regular fat",93,0.1,12,84,142,48,0.23,1
+06010,"Ice cream, chocolate flavour, regular fat",130,0.9,30,110,245,71,0.6,2
+06011,"Ice cream, strawberry flavour, regular fat",107,0.2,13,92,165,54,0.29,2
+06012,"Ice cream, vanilla flavour, regular fat",117,0.2,12,84,142,64,0.23,1
+06013,"Ice cream, vanilla flavour, with nuts, regular fat",92,0.2,15,91,157,47,0.3,1
+06014,"Milk, camel, whole, fresh, raw",56,1.5,16,92,344,119,0.35,2
+06015,"Milk, cow, condensed, skimmed, sweetened, raw",358,0.3,30,300,446,125,1.05,8
+06016,"Milk, cow, condensed, whole, sweetened, raw",280,0.2,25,255,357,130,0.9,8
+06017,"Milk, cow, powder, skimmed",1290,0.4,115,1000,1602,550,3.83,23
+06018,"Milk, cow, powder, whole",975,0.5,85,730,1157,440,2.97,25
+06019,"Milk, cow, skimmed, raw",130,0.1,12,109,170,44,0.32,1
+06020,"Milk, cow, whole, fermented (Lala - Industrial)",100,0.1,10,138,126,36,0.34,3
+06021,"Milk, cow, whole, fermented (Lala - mursik)",65,0.1,5,59,64,22,0.22,0
+06022,"Milk, cow, whole, fresh, raw",119,0.1,11,122,136,39,0.63,3
+06023,"Milk, goat, fluid, whole, raw",180,0.1,12,128,207,57,0.35,1
+06024,"Milk, human/breast, mature, fluid",32,0,3,15,51,14,0.17,2
+06025,"Milk, sheep, fluid, whole, raw",193,0.1,18,142,175,44,0.54,2
+06026,"Yoghurt, cow milk, whole, plain",149,0.2,10,93,130,32,0.34,2
+06027,"Milk, camel, whole, fresh, boiled",66,1.7,18,108,404,140,0.41,2
+06028,"Milk, cow, skimmed, boiled",153,0.1,14,128,200,52,0.38,1
+06029,"Milk, cow, whole, fresh, boiled",140,0.1,13,143,160,45,0.74,3
+06030,"Milk, goat, fluid, whole, boiled",211,0.1,14,150,243,68,0.41,1
+06031,"Milk, sheep, fluid, whole, boiled",227,0.1,21,166,206,52,0.64,2
+07001,"Beef, high fat, w/o bones, raw",16,2.2,12,188,134,83,3,1
+07002,"Beef, lean, raw",5,2.3,24,279,241,107,4.22,15
+07003,"Beef, liver, raw",6,10.1,17,369,159,75,4.12,17
+07004,"Beef, medium fat, w/o bones, raw",4,12.4,24,280,231,121,3.85,20
+07005,"Camel blood, raw",8,20.6,6,33,114,313,0.65,12
+07006,Camel Meat,4,3.8,13,134,325,49,1.93,9
+07007,"Cow’s blood, raw",14,18.8,5,20,199,469,1.13,21
+07008,"Duck, meat and skin, fresh, raw",5,1.9,15,167,212,82,1.55,20
+07009,"Chicken, unespecified part, w/o bone, meat&skin, raw",13,2.5,20,243,152,68,0.89,16
+07010,"Egg, chicken, white (albumen), raw",5,0.1,11,10,119,143,0,11
+07011,"Egg, chicken, whole, raw",54,1.7,14,180,126,155,1.13,23
+07012,"Egg, chicken, yolk, raw",130,6,8,398,104,50,2.5,56
+07013,"Goat blood, raw",8,27.2,6,23,169,216,0.65,12
+07014,"Goat, lean, raw",10,7.2,29,276,243,156,3.66,22
+07015,"Goat liver, raw",12,6.6,18,308,225,64,3.48,48
+07016,"Goat, medium fat, raw",10,1.9,22,237,198,121,3.26,26
+07017,"Guinea fowl, meat, with skin",31,2.2,21,187,240,58,1.48,24
+07018,"Lamb liver, raw",10,8.3,18,413,326,67,4.22,57
+07019,"Lamb, raw (unspecified part)",12,1.7,22,150,230,60,3.33,20
+07020,"Pork, meat, raw (unspecified part)",25,1.1,13,178,253,58,1.59,28
+07021,"Rabbit meat, raw",12,1,18,290,370,53,1.6,25
+07022,"Sausage, beef, raw",42,1,26,492,279,679,3.42,79
+07023,"Sausage, frankfurters",78,1.5,11,150,75,1000,2.3,7
+07024,"Sausage, liver, raw",30,6.4,12,230,170,900,2.3,58
+07025,"Sausage, pork, raw",25,1.1,15,160,160,720,1.7,26
+07026,"Quail, flesh & skin, raw",10,2.6,24,243,358,49,1.58,16
+07027,"Egg, chicken, whole, boiled (without salt)",51,1.6,13,171,120,147,1.07,21
+07028,"Egg, chicken, whole, poached (without salt)",58,1.9,15,194,136,167,1.21,24
+07029,"Egg, chicken, yolk, boiled (without salt)",124,5.7,8,378,99,48,2.38,53
+07030,"Egg, chicken, white (albumin), boiled (without salt)",5,0.1,10,10,113,135,0,10
+07031,"Beef, high fat, w/o bones, boiled (without salt)",21,3.7,12,203,112,62,5,1
+07032,"Beef, high fat, w/o bones, grilled (without salt and fat)",20,3,14,235,158,98,4.17,1
+07033,"Beef, high fat, w/o bones, stewed (without salt)",21,3.5,12,235,105,58,4.69,1
+07034,"Beef, lean, boiled (without salt)",7,4.7,30,370,246,99,8.62,30
+07035,"Beef, lean, grilled (without salt and fat)",6,3.1,29,349,285,127,5.87,20
+07036,"Beef, lean, stewed (without salt)",7,4.4,30,421,228,91,7.97,28
+07037,"Beef, liver, boiled (without salt)",7,14.6,20,391,145,68,6.25,25
+07038,"Beef, medium fat, without bones, boiled (without salt)",5,20.7,24,303,192,91,6.41,34
+07039,"Beef, medium fat, without bones, grilled (without salt and fat)",5,16.3,28,350,272,143,5.34,28
+07040,"Beef, medium fat, without bones, stewed (without salt)",5,19.4,24,350,180,85,6.01,32
+07041,"Chicken, unspecified part, w/o bone, meat&skin, boiled (without salt)",14,2.5,18,215,77,34,1.13,21
+07042,"Chicken, unspecified part, w/o bone, meat&skin, grilled (without salt and fat)",15,2.9,19,249,156,70,1.14,21
+07043,"Goat, lean, boiled (without salt)",12,9.9,34,317,217,137,5.46,33
+07044,"Goat, lean, grilled (without salt and fat)",14,9.6,35,332,281,189,5.03,32
+07045,"Goat, liver, boiled (without salt)",14,9.4,22,326,205,58,5.27,73
+07046,"Goat, medium fat, boiled (without salt)",12,2.7,25,273,177,106,4.86,38
+07047,"Goat, medium fat, grilled (without salt and fat)",14,2.6,26,286,229,147,4.48,37
+07048,"Lamb, liver, boiled (without salt)",12,12,22,438,296,61,6.39,86
+07049,"Lamb, unspecified part, boiled (without salt)",14,2.5,21,179,189,54,4.97,30
+07050,"Lamb, unspecified part, grilled (without salt and fat)",17,2.3,27,185,283,74,4.83,29
+07051,"Pork, meat, unspecified part, boiled (without salt)",30,1.8,12,164,195,40,2.45,44
+07052,"Pork, meat, unspecified part, grilled (without salt and fat)",26,1.3,18,228,307,75,2.27,41
+07053,"Rabbit meat, stewed (without salt)",15,1.5,17,341,299,47,2.35,37
+07054,"Rabbit meat, roasted (without salt and fat)",13,1.1,17,280,336,51,1.82,28
+07055,"Sausage, beef, grilled (without salt and fat)",57,1.6,35,623,316,815,4.55,106
+07056,"Sausage, frankfurters, boiled (without salt)",68,1.5,11,155,66,876,2.37,7
+07057,"Sausage, liver, grilled (without salt and fat)",40,8.5,16,291,193,1080,3.07,77
+07058,"Sausage, pork, boiled (without salt)",23,1.1,16,174,148,665,1.85,28
+07059,"Sausage, pork, grilled (without salt and fat)",34,1.5,21,211,189,900,2.36,36
+08001,"Cod, fillet, raw",15,0.2,26,209,367,79,0.37,27
+08002,"Dagaa fish (omena), dried, raw",2790,6.9,98,2730,800,300,16,22
+08003,"Eel, raw",20,0.6,20,216,272,70.5,1.62,6.5
+08004,"Herring stock, raw",67,1.1,32,250,357,95,0.81,36
+08005,"Lungfish, fillet, raw",180,2.6,20,253,168,91,1.12,24
+08006,"Mudfish (kamongo), fillet, raw",23,0.5,24,180,301,41,1.07,38
+08007,"Mackerel, raw",23,0.9,33,215,395,66,0.52,48
+08008,"Nile perch, dry, raw",516,4,112,1092,859,376,2,84
+08009,"Nile perch, fillet w/o bones, raw",133,1,29,282,222,97,0.56,22
+08010,"Nile tilapia, fillet, w/o skin and bones, raw",109,2.7,17,167,151,64,0.5,17
+08011,"Prawns, flesh, raw",59,1.5,43,246,252,191,1.43,42
+08012,"Sardine, flesh, raw",42,1.3,36,256,364,38,1.2,50
+08013,"Shark, raw",8,0.38,32.58,263,372,63.63,0.46,28.9
+08014,"Tuna, raw",5,0.8,41,266,379,50,0.46,73
+08015,"Cod, fillet, steamed (without salt)",18,0.2,27,217,336,82,0.45,29
+08016,"Cod, fillet, grilled (without salt and fat)",20,0.2,31,251,416,90,0.49,35
+08017,"Cod, fillet, boiled in recipe (without salt and fat)",18,0.3,31,255,448,97,0.45,32
+08018,"Dagaa fish (omena), dried, stewed (without salt)",1270,3.1,44,1240,364,136,7.39,10
+08019,"Eel, steamed (without salt)",24,0.6,20,221,246,72,1.95,7
+08020,"Eel, grilled (without salt and fat)",26,0.7,23,252,300,78,2.1,8
+08021,"Eel, boiled in recipe (without salt and fat)",24,0.7,24,260,328,85,1.95,8
+08022,"Herring stock, steamed (without salt)",80,1.1,33,256,322,97,0.97,39
+08023,"Herring stock, grilled (without salt)",87,1.3,37,292,394,105,1.05,47
+08024,"Herring stock, boiled in recipe (without salt and fat)",80,1.4,39,301,430,114,0.97,43
+08025,"Lungfish, fillet, steamed (without salt)",217,2.5,21,259,152,93,1.34,26
+08026,"Lungfish, fillet, grilled (without salt and fat)",234,2.9,24,296,185,100,1.45,31
+08027,"Lungfish, fillet, boiled in recipe (without salt and fat)",217,3.2,24,305,202,109,1.34,28
+08028,"Mudfish (kamongo), fillet, steamed (without salt)",28,0.5,24,184,272,42,1.29,41
+08029,"Mudfish (kamongo), fillet, grilled (without salt and fat)",30,0.6,28,210,333,45,1.39,49
+08030,"Mudfish (kamongo), fillet, boiled in recipe (without salt and fat)",28,0.7,29,217,363,49,1.29,46
+08031,"Prawns, fresh, steamed (without salt)",71,1.4,44,252,228,196,1.72,45
+08032,"Prawns, fresh, grilled (without salt and fat)",69,1.7,50,286,293,223,1.66,48
+08033,"Prawns, fresh, boiled in recipe (without salt and fat)",71,1.5,47,267,258,196,1.72,50
+08034,"Sardine, fresh, steamed (without salt)",50,1.2,36,256,321,38,1.45,53
+08035,"Sardine, fresh, grilled (without salt and fat)",58,1.5,44,316,423,45,1.68,69
+08036,"Sardine, fresh, boiled in recipe (without salt and fat)",50,1.6,42,301,428,45,1.45,59
+08037,"Shark, steamed (without salt)",10,0.4,33,269,336,65,0.55,31
+08038,"Shark, grilled (without salt and fat)",11,0.4,38,307,411,70,0.6,38
+08039,"Shark, boiled in recipe (without salt and fat)",10,0.5,39,316,448,77,0.55,35
+08040,"Tuna, steamed (without salt)",7,0.8,44,283,355,53,0.57,83
+08041,"Tuna, grilled (without salt and fat)",7,1,50,324,435,57,0.62,99
+08042,"Tuna, boiled in recipe (without salt and fat)",7,1,52,333,474,63,0.57,92
+09001,Animal fat/ lard,1,0.1,0,3,1,2,0.11,0
+09002,Corn oil,0,0,0,0,0,0,0.01,0
+09003,Fish liver oil,0,0,0,0,0,0,0,0
+09004,"Margarine,20% fat",0,0,1,14,25,733,0,0
+09005,"Margarine,60% fat",21,0,2,16,30,700,0,0
+09006,"Margarine,80% fat",10,0,2,10,5,300,0,0
+09007,Mustard seed oil,0,0,0,0,0,0,0,0
+09008,Olive oil,0,0,0,1,0,0,0.01,0
+09009,Peanut oil,0,0.1,1,3,0,0,0.1,0
+09010,Red palm oil,6,0,0,7,0,0,0,0
+09011,"Shortening, commercial, vegetable fat",1,0,0,0,1,1,0.02,0
+09012,Soya bean oil,0,0,0,0,0,0,0,0
+09013,Sun flower oil,0,0,0,0,0,0,0.01,0
+10001,"Bambara groundnuts, dried, raw",39,3.3,166,190,1330,2,1.81,0
+10002,"Coconut, fresh, mature fruit, flesh",18,2.3,47,146,125,29,0.73,3
+10003,"Coconut, fresh, young or immature, flesh",34.7,1.2,35,56,266,12,0.42,4
+10004,"Coconut meat, dried (desiccated)",25.7,2.7,88.8,210,536,36.5,2,3
+10005,"Jack fruit, seed, mature, dry, raw",84,5.9,126,205,463,8,1.56,1
+10006,"Mustard Seeds, Dry, Raw",433,16,220,587,380,2,3.9,70
+10007,"Nut, almond, with or without skin, raw, unsalted",249,4.1,283,469,724,1,3.44,4
+10008,"Nut, ground nut, with skin, unsalted, dry, raw",117,5.5,225,232,630,1,2.24,12
+10010,"Nut, macadamia, raw, unsalted",44,2.2,100,276,308,5,1.3,10
+10011,"Nut, pistachio, raw, unsalted",116,4.8,132,503,1030,5,2.07,6
+10012,Peanut Butter,117,5.5,225,232,630,1,2.24,12
+10013,"Seed, pumpkin, hulled & dried, unsalted",50,5.5,519,1140,796,19,7.24,9
+10014,"Seed, sesame (sim sim) unsalted, dry, raw",1430,9.7,333,803,322,7,1.72,21
+10015,"Seed, sunflower, unsalted, dry, raw",98,5,362,670,450,0,6,61
+10016,"Water Melon, Seed Kernel, Dry, Raw",69,7.1,513,706,433,99,3.4,10
+11001,"Honey, Raw",11,0.6,3,4,74,17,0,3
+11002,"Sugarcane, Juice, Raw",10,1.1,13,22,150,1,0.14,0
+11003,"Sugar, white, granulated or lump",0,0,0,0,0,0,0,1
+12001,"Beef, broth",4,0,4,56,144,266,0.03,1
+12002,"Coconut, fresh, water",24,0.2,11,14,130,5,0.13,1
+12003,"Coffee, instant, dry powder or granules",145,3.9,350,320,3690,83,0.71,9
+12004,"Drinking chocolate, powder",60,2,98,128,591,120,1.55,3
+12005,"Tea, chai, instant dry powder",118,2.3,272,239,6040,72,1.7,15
+12006,"Water, tap",3,0,1,0,1,3,0,0.2
+12007,"Wine, Red",8,0.3,11,16,89,10,0.07,1
+12008,"Wine, White, Dry",8,0.5,8,12,54,14,0.08,1
+12009,"Wine, White, Sweet",10,0.6,9,16,81,20,0.08,1
+13001,Anise seed,648,37,170,440,1440,16,5.3,5
+13002,"Baking powder, dry powder",4280,9.7,34,8410,10200,8850,0.89,0
+13003,"Baking soda (bicarbonate), dry powder",0,0,0,0,0,27400,0,0
+13004,"Bay leaf, dried",832,43,120,112,530,23,3.7,3
+13005,"Cardamom, seeds, ground",383,14,215,165,1120,18,7.47,1
+13006,"Chilli, fresh, raw",15,1.2,30,51,320,3,0.27,1
+13007,"Chilli, dried",142,6.2,175,274,2250,19,1.66,19
+13008,"Cinnamon, dried, ground",1183,8.3,54,21,482,17,2,3
+13009,"Cloves, dry, raw",536,14.2,253,86,877,183,1.13,8
+13010,"Coconut, Milk",5,0.5,10,43,131,19,0.26,2
+13011,"Coriander Leaves, fresh, raw",115,6.6,45,44,578,40,0.54,1
+13012,"Coriander seed, dried, ground",613,20.1,245,347,1189,27,3.6,24.9
+13013,"Cumin seeds, dried, raw",854,38.4,330,308,1213,124,4.05,5
+13014,"Curry leaves, fresh, raw",740,6.9,201,70,584,19,1.18,17
+13015,Curry powder,479,34.3,333,301,1728,52,4.08,17
+13016,"Fenugreek leaves, fresh, raw",185,7.8,61,48,96,66,0.54,4
+13017,"Fenugreek seeds, raw",160,14.1,183,370,530,48,2.93,8
+13018,Garam masala,760,32.6,330,390,1450,97,3.8,17
+13019,"Garlic, peeled or unpeeled, fresh, raw",30,1.3,25,39,510,8,1,14
+13020,"Ginger, dried, ground",152,24.3,335,310,1225,50,3.72,55
+13021,"Green Ginger (Mature), fresh, raw",46.8,1.9,38,93.7,661,18,1,2
+13022,"Mint Leaves, fresh, raw",200,3.6,34,62,380,28,0.8,1
+13023,"Onion, mature, red skinned, peeled, fresh, raw",26,0.9,19,40,152,5,0.16,1
+13024,"Onion, spring, raw",44,1.3,14,34,225,12,0.3,1
+13025,"Parsley, fresh, raw",390,5.06,35,175,1290,54,0.88,0
+13026,"Pepper, ground, black, dry, raw",463,19.4,253,188,576,25,1.28,3
+13027,"Salt, Iodized",32,0.1,1,6,98,38500,0.1,2
+13028,"Spice, mixed or all spice",727,35.5,203,277,1440,90,3.65,3
+13029,"Tamarind, fruit, dry, raw",166,9,83,190,836,25,1,2
+13030,"Tamarind, fruit, fresh, raw",105,9.2,83,105,836,25,0.58,2
+13031,"Tomato, sauce (Ketchup)",13,0.7,16,28,316,918,0.18,0.5
+13032,"Tomato, paste, with added salt",30,1.7,43,71,911,630,0.57,4
+13033,"Tomato, soup, condensed, canned",10,0.4,13,21,290,545,0.3,0.5
+13034,"Turmeric, dried, ground",500,39,225,284,1250,25,3.6,4.3
+13035,"Yeast, dry powder",120,3.4,230,1690,2000,50,8,1
+14001,"Grasshopper, Brown, Fresh, Raw",7,3.7,10,35,75,66,3.57,0
+14002,"Grasshopper, Green, Fresh, Raw",9,5.6,11,47,125,121,5.81,0
+14003,"Termite, Dry, Raw",91,35.2,5,609,388,1969,0.09,4
+14004,"Termite, Fresh, Raw",1460,8.3,15,780,200,4,0,0
+15001,Uji wa mahindi (Maize Porridge),25,0.3,12,64,50,10,0.33,2
+15002,"Sorghum, Finger Millet and Maize Porridge",33,0.5,14,47,57,10,0.27,2
+15003,Kaimati (Fried Dumplings),17,2.1,16,93,81,4,0.45,0
+15004,Mahamri (Swahili Doughnuts),20,2.8,19,113,101,4,0.56,0
+15005,Whole Maize Flour Ugali,12,1.1,31,150,93,7,0.77,4
+15006,Maize and Finger Millet Flour Ugali,79,2.9,48,112,158,6,0.73,5
+15007,"Maize, Red Sorghum and Finger Millet Ugali",39,1.9,44,118,131,6,0.72,5
+15008,Cassava and Red Sorghum Ugali,24,0.9,38,74,163,9,0.5,5
+15009,Refined Maize Flour Ugali,12,1.1,33,158,97,8,0.81,4
+15010,"Sorghum, Maize flour & Finger Millet Ugali",26,1.3,33,61,92,5,0.44,5
+15011,Cassava Flour Ugali,79,0.8,26,57,326,20,0.41,1
+15012,"Cassava, Millet & Sorghum Porridge",18,0.4,10,15,47,6,0.12,1
+15013,Cassava Porridge (Uji wa Muhogo),12,0.1,4,7,39,5,0.05,0
+15014,Finger Millet Porridge (Uji wa Wimbi),35,1.1,16,17,52,4,0.16,2
+15015,Bulrush Millet Porridge (Uji wa Mawele),9,6,17,49,55,5,0.77,7
+15016,Rice Flour Porridge (Uji wa Mchele),4,0.1,5,17,26,5,0.11,1
+15017,Omena Stew (Silver Sardine Stew),378,1,20,333,188,449,2.26,4
+15018,“Busara” (Whole Maize and Finger Millet Porridge),60,1.9,20,32,41,4,0.22,2
+15019,White Chapati,25,3.9,22,126,90,100,0.61,0
+15020,Brown Chapati,23,2.4,76,182,213,120,1.5,25
+15022,Fried Egg (Mayai ya Kukaangwa),56,1.8,14,186,132,717,1.16,23
+15023,Omelette,36,1.5,17,105,169,189,0.75,10
+15024,Spanish Omelette,35,1.3,13,112,135,409,0.75,12
+15025,Meat Samosa (Sambusa ya Nyama),51,11.5,37,288,302,175,2.99,13
+15026,Vegetable Samosa (Sambusa ya Mboga),55,3.8,35,144,333,243,1.76,1
+15027,Pancakes (Chapati za Maji),77,2.9,22,163,138,37,0.83,4
+15028,Tosti Mayai (Egg Toast),56,2.1,25,167,152,587,1.2,20
+15029,Drop Scones,61,2.4,18,135,112,116,0.69,4
+15030,“Terere” (Stir fried amaranth leaves),192,4.9,87,72,442,161,0.75,14
+15031,Sukumawiki (Stir fried kales),291,2.3,33,56,198,123,0.42,0
+15032,Stir-fried Cabbage,48,0.6,11,43,305,510,0.24,1
+15033,Mrenda and Seveve (Jute Mallow and Pumpkin leaves),141,1.8,26,105,197,180,0.62,2
+15034,Pumpkin Leaves,166,2,51,101,236,332,0.67,2
+15035,"Saget, Terere & Managu (Spider plant, Amaranth & African Nightshade leaves)",184,3.3,39,104,244,174,0.7,8
+15036,Pilau (Spiced Rice),19,1.3,20,138,285,349,1.24,3
+15037,Mseto wa Ndengu (Rice with green grams),19,0.8,23,53,101,59,0.48,2
+15038,Mseto wa Maharagwe (Add Rice with Beans),27,1.3,24,129,172,356,0.76,1
+15039,Nderema (Vine Spinach),233,9.5,37,55,389,170,0.41,0
+15040,"Fiqe (Red Sorghum, Beans and Teff Flour)",170,3.5,77,214,315,495,1.4,4
+15041,"Qanchibelo (Beef, Maize & Wheat Flour)",62,5.9,24,156,169,225,1.97,8
+15042,Qita (Maize and Wheat flour pancake),24,2.8,28,131,105,158,1.81,0
+15043,"Gurdo, Marqa (Ugali in Sour Milk)",103,2.2,78,246,264,268,1.36,9
+15044,Mchuzi wa ndengu (Green Gram Stew),33,1.6,43,61,184,243,0.57,5
+15045,Mchuzi wa Maharagwe (Bean Stew),20,1,17,92,125,165,0.44,1
+15046,Mchuzi wa Ndengu Kamande (Lentil Stew),26,2,28,81,183,275,0.93,8
+15047,Nyirinyiri (Camel meat),7,6.9,21,213,407,346,3.62,17
+15049,Ashir,18,0.2,9,29,39,128,0.21,1
+15051,"Ugali (Cassava, Fingermillet and Sorghum Flour Ugali)",69,1.7,40,70,236,11,0.53,4
+15052,Yam Stew,13,0.7,14,46,279,347,0.21,0
+15053,Githeri (stewed Maize & Beans),39,2.2,41,214,281,233,1.01,2
+15054,"Mukimo (Maize, Beans, Potatoes & Pumpkin Leaves)",38,2,36,159,436,266,0.74,2
+15055,Githeri (Sauteed Fresh Maize and beans),41,2.2,43,222,308,335,1.32,3
+15056,Matoke (Stewed Green Bananas & Meat),16,3.9,22,105,380,381,1.12,5
+15057,"Mukimo (Fresh Maize, Potatoes & Pumpkin Leaves)",44,1.6,35,116,404,336,0.93,2
+15058,Stewed Potatoes & Arrowroots,8,0.9,17,38,401,173,0.44,1
+15059,"Mukimo wa Njahi (Black Beans, Green Bananas & Potatoes)",31,3.2,65,152,606,273,1.06,4
+15060,Githeri (Fresh beans and Maize),17,1.7,24,119,319,433,1.21,3
+15061,Mashed Potato and Bananas,12,1.4,23,70,551,544,0.36,1
+15062,Mukimo wa Njahi (Raw & Ripe Bananas),24,2.2,54,103,437,229,0.79,3
+15063,Groundnut Sauce,132,2.3,101,209,366,492,1.2,7
+15064,Vimumunya vya Chumvi (Pumpkin & Coconut Milk),16,0.3,13,39,183,325,0.25,1
+15065,Vinolo (Banana and Maize Flour Ugali),9,1.2,22,68,147,9,1.16,0
+15066,Biryani rice,9,0.3,9,52,22,180,0.47,0
+15067,Vimumunya vya Sukari (Sweetened Pumpkin & Coconut Milk),14,0.3,11,31,155,15,0.21,1
+15068,Wukunu (Sweet potatoes & Dehulled Black Beans),21,1.5,33,82,288,229,0.41,1
+15069,Mushenye (Green Maize and Sweet Potatoes),44,2.3,51,196,340,242,1.07,3
+15070,Ingokho (Stewed Chicken),21,2.7,23,211,210,482,1.01,16
+15072,Tsiswa (Stewed termites),85,24.8,19,123,831,1070,1.85,29
+15073,Ingokho (Fried Chicken),31,5.6,38,492,410,932,2.13,39
+15074,Wali wa Kuchemshwa (Boiled Rice),9,0.3,9,50,21,216,0.46,0
+15075,Wali wa Yasmin (Onion Fried Rice),13,0.5,12,61,46,275,0.53,1
+15076,Stir-fried Spinach,99,3.7,66,47,299,870,0.62,1
+15077,Thabai / Thaa (Stinging Nettle Leaves),132,1.4,28,26,113,312,0.14,1
+15078,Rhikhuvi (Stewed Cowpea Leaves),146,1.3,23,49,202,660,0.53,1
+15079,Kunde and Mrenda (Stewed Cowpeas and Jute Mallow leaves),158,2.4,23,93,244,761,0.64,2
+15080,Obwoba (Stewed Mushrooms in Peanut Butter),38,1.4,47,130,408,822,0.54,15
+15081,Chai ya Maziwa (Mixed Tea),42,0,5,40,45,15,0.21,1
+15082,Stewed Dried Fish,189,2.1,57,395,403,572,1.02,29
+15083,Kimanga cha Ndizi (Smoked Green Bananas and Kidney Beans),46,2,43,188,401,485,0.89,2
+15084,Kimanga Cha Mihogo (Mashed Cassava and Pigeon Peas),94,1.6,44,93,469,303,0.85,4
+15085,Ndoto (Sauteed Red Kidney Beans & Red Sorghum),25,1.8,53,162,211,270,0.89,6
+15086,Muthokoi (Dehulled Maize and Beans),27,1.3,25,120,185,325,0.59,1
+15087,Beef Stew,12,11.2,27,257,264,315,3.48,18
+15090,Kimanga cha Viazi Vitamu (Mashed Sweet Potato & Black Beans),32,1.6,38,78,388,276,0.63,2
+15091,Kitojo (Sweet Potato Leaves),97,0.9,51,31,500,648,0.26,1
+15092,Mchuzi wa Mbaazi (Pigeon Peas Stew),47,1.4,33,69,260,281,0.74,4
+15093,Nchenga/ Nzenga (Crushed Maize),13,0.3,11,22,85,552,0.16,0
+15094,Mseto wa Viazi (Potatoes in Rice),9,0.4,9,45,92,131,0.38,0
+15095,Likhanga (Stewed Guinea Fowl),31,2,22,152,240,736,1.25,18
+15096,Fried tilapia,252,6.2,40,387,349,149,1.16,39
+15097,Stewed Green Bananas,9,0.7,15,24,175,100,0.21,1
+15098,Stir Fried Beef,16,16.4,40,422,483,682,5.13,27
+15099,Stir Fried Goat Meat,33,4.1,50,424,465,221,5.74,43
+15100,Finger Millet Ugali,137,4.4,61,72,212,3,0.67,6
+15101,Omena wa Kukaangwa (Fried Omena),879,2.3,33,782,281,90,5.28,7
+15102,Aluru (Stewed Quails),90,1.6,23,202,302,761,1.24,9
+15103,Mashed Potatoes,10,1.4,20,82,650,330,0.32,1
+15104,Mashed Bananas,8,0.6,20,25,245,348,0.19,1
+15105,Enriched Mashed Potatoes,10,1.1,16,67,529,209,0.26,1
+15106,Enriched Mashed Bananas,8,0.5,17,22,207,276,0.16,1
+15107,Stewed Nile Perch,105,1,26,216,203,596,0.51,16
+15108,Stewed Goat Meat,16,2.1,25,225,235,783,3.04,23
+15109,Pan Fried Sweet Potatoes,44,0.8,21,50,325,16,0.73,1
+15110,Potato Chips,17,2.7,37,159,1260,13,0.63,1
+15111,Kimito (Mashed Beans & Potatoes),35,2.2,36,173,557,359,0.77,2
+15112,Arrowroot Stew,11,0.9,18,41,431,250,0.44,1
+15113,Sweet Potatoes with Peanut Butter,23,0.7,21,33,179,130,0.42,1
+15114,Black Bean Stew (Dolichos/ Njahi Stew),17,1.2,26,55,175,164,0.42,2
+15115,Bean Stew with Milk and Cream,66,1.9,34,197,259,273,0.96,2
+15116,Mcheleng (Rice with Milk),53,0.4,12,96,73,419,0.64,1
+15117,Pan Fried Arrowroots,8,1.3,29,50,696,616,1.09,1
+15118,Nyenyi (Mashed Pigeon Peas & Green Maize),56,1.8,41,106,479,273,0.89,4
+15119,Finger Millet and Sorghum Porridge,93,1.1,24,91,130,23,0.54,4
+15120,Mashed Pumpkin and Black Nightshade Leaves,91,6.7,41,75,456,411,0.66,1
+15121,Enriched Matoke,15,0.9,33,37,256,220,0.32,2
+15122,Oatmeal,15,1,35,110,82,209,0.71,10
+15123,Oat Porridge (Uji wa Shayiri),39,0.4,18,77,69,14,0.45,5
+15124,Enriched Mandazi (East African Doughnuts; Enriched),45,3.3,21,134,105,80,0.66,2
+15125,Basic Mandazi (East African Doughnuts; Basic),136,3.5,19,331,350,241,0.52,0
+15126,Stewed Split Dal,22,1.2,21,54,142,459,0.42,6
+15127,Potato Curry,25,1.7,22,68,475,537,0.41,1
+15128,Peas and Brinjal Curry,38,2.1,30,71,253,520,1.96,2
+15129,Steamed Rice (Wali wa Mvuke),10,0.3,9,49,22,521,0.45,1
+15130,Rotli (Indian Chapati),25,2.7,83,199,234,354,1.64,27
+15131,Potato Bhajia,29,3,39,132,783,587,0.78,2
+15132,Chaas (Diluted Yoghurt),106,0.1,8,66,93,262,0.24,2
+15133,Siro (Semolina & Nuts),81,0.5,19,105,140,24,0.66,4
+15134,Minced Meat Balls,14,4.4,17,126,133,321,1.55,7
+15136,Wheat Flour Porridge (Uji wa Ngano),14,0.9,21,32,60,3,0.24,1
+15137,Okra Meat Dish,23,5.2,24,126,199,559,1.65,8
+15138,Hydrabadi Biryani,35,1,22,115,187,457,0.62,15
+15139,Chick Peas Curry,77,2.5,48,83,329,426,0.96,11
+15140,Bhature (Fried Indian Bread),62,2.8,18,108,109,518,0.5,1
+15141,Pumpkins with Peanut Butter,24,0.6,29,44,195,196,0.36,1
+15142,Firinda (Skinned bean Stew),43,1.6,32,150,229,355,0.7,2

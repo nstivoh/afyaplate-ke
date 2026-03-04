@@ -1,0 +1,37 @@
+code,food_name,16_2,18_2,20_2,22_2,18_3,20_3,22_3,16_4,18_4,20_4,22_4,20_5,22_5,22_6
+1018,"Maize, grain, white variety, whole, dry, raw",0,1.54,0,0,0.04,0,0,0,0,0,0,0,0,0
+1020,"Maize meal, sifted, fortified, packaged, raw",0,0.96,0,0,0.03,0,0,0,0,0,0,0,0,0
+1023,"Green Maize, white, whole, grain, fresh, raw",0,0.97,0,0,0.02,0,0,0,0,0,0,0,0,0
+1025,"Millet, bulrush, grain, dry, raw",0,2,0,0,0.13,0,0,0,0,0,0,0,0,0
+1039,"Sorghum, grain, white, dry, raw",0,1.26,0,0,0.03,0,0,0,0,0,0,0,0,0
+1034,"Rice, white, milled, polished grain, dry, raw",0,0.23,0,0,0.01,0,0,0,0,0,0,0,0,0
+1043,"Wheat Flour (refined/fortified/sifted packaged), raw",0,0.62,0,0,0.04,0,0,0,0,0,0,0,0,0
+1045,"Wheat, whole, grain, dry, raw",0,0.99,0,0,0.08,0,0,0,0,0,0,0,0,0
+3004,"Beans, kidney, dry, raw",0,0.37,0,0,0.79,0,0,0,0,0,0,0,0,0
+3015,"Garden peas, fresh, raw",0,0.22,0,0,0.04,0,0,0,0,0,0,0,0,0
+3017,"Gram, black, dry, raw",0,0.28,0,0,0.49,0,0,0,0,0,0,0,0,0
+5003,"Avocado, ripe, raw",0,1.79,0,0,0.13,0,0,0,0,0,0,0,0,0
+6022,"Milk, cow, whole, fresh, raw",0,0.09,0,0,0.02,0,0,0,0,0.02,0,0,0,0
+6020,"Milk, cow, whole, fermented (Lala - Industrial)",0,0.07,0,0,0.02,0,0,0,0,0.02,0,0,0,0
+6021,"Milk, cow, whole, fermented (Lala - mursik)",0,0.08,0,0,0.03,0,0,0,0,0.02,0,0,0,0
+6026,"Yoghurt, cow milk, whole, plain",0,0.07,0,0,0.01,0,0,0,0,0.02,0,0,0,0
+6014,"Milk, camel, whole, fresh, raw",0,0.09,0,0,0.04,0,0,0,0,0.01,0,0,0,0
+7011,"Egg, chicken, whole, raw",0,1.43,0.02,0,0.03,0.01,0,0,0,0.15,0.01,0,0.04,0.09
+7022,"Sausage, beef, raw",0,2.04,0.07,0,0.13,0.03,0,0.03,0.04,0.01,0,0,0,0
+7001,"Beef, high fat, w/o bones, raw",0,0.56,0,0,0.29,0.03,0,0.06,0.04,0,0,0,0.03,0
+7004,"Beef, medium fat, w/o bones, raw",0,0.17,0,0,0.05,0.01,0,0.02,0,0,0,0.01,0.02,0
+7002,"Beef, lean, raw",0,0.1,0,0,0.02,0,0,0,0,0.03,0,0,0,0.02
+7016,"Goat, medium fat, raw",0,0.32,0,0,0.08,0,0,0.03,0.05,0,0,0,0.03,0
+7014,"Goat, lean, raw",0,0.19,0,0,0.04,0,0,0,0,0.04,0,0,0,0.02
+7009,"Chicken, unespecified part, w/o bones, meat&skin, raw",0,2.57,0.02,0,0.15,0.03,0,0,0,0.06,0.02,0,0.01,0
+7003,"Beef, liver, raw",0,0.31,0,0,0.08,0.07,0,0,0,0.26,0.03,0.05,0.22,0.07
+8010,"Nile tilapia, fillet, w/o skin and bones, raw",0,0.22,0.01,0,0.04,0.01,0,0,0,0.03,0.01,0,0.04,0.05
+8005,"Lungfish, fillet, raw",0,0.06,0,0,0.03,0,0,0,0,0.06,0.02,0,0.03,0.08
+8009,"Nile perch, fillet w/o bones, raw",0,0.02,0,0,0,0,0,0,0,0.05,0,0.02,0.05,0.12
+8002,"Dagaa fish (omena), dried, raw",0,0.33,0.03,0,0.29,0.1,0,0,0.04,0.3,0.04,0.68,0.39,1.33
+9002,Corn oil,0,45.7,0,0,0.75,0,0,0,0,0,0,0,0,0
+9012,Soya bean oil,0,48.8,0,0,6.47,0,0,0,0,0,0,0,0,0
+10010,"Nut, macadamia, raw, unsalted",0,1.25,0,0,0.12,0,0,0,0,0,0,0,0,0
+10005,"Jack fruit, seed, mature, dry, raw",0,0.17,0,0,0.02,0,0,0,0,0,0,0,0,0
+10009,"Nut, ground nut, with skin, unsalted, dry, raw",0,13.9,0.01,0,0.05,0,0,0,0,0,0,0,0,0
+10014,"Seed, sesame (sim sim) unsalted, dry, raw",0,23.6,0.01,0,0.22,0,0,0,0,0,0,0,0,0
