@@ -46,6 +46,7 @@ export function MealPlannerForm() {
   const { plan, setPlan } = usePlannerStore();
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [selectedClientId, setSelectedClientId] = React.useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema) as any,
@@ -72,6 +73,9 @@ export function MealPlannerForm() {
       const response = await generateMealPlan(payload as any);
       setPlan(response);
       localStorage.setItem('latest-meal-plan', JSON.stringify(response));
+      if (selectedClientId) {
+        localStorage.setItem(`meal-plan-${selectedClientId}`, JSON.stringify(response));
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -80,6 +84,7 @@ export function MealPlannerForm() {
   }
 
   const handleClientSelect = (client: Client) => {
+    if (client.id) setSelectedClientId(client.id.toString());
     form.setValue("target_calories", client.target_calories ?? 2200);
     form.setValue("num_meals", 3);
 
@@ -291,19 +296,21 @@ export function MealPlannerForm() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="llm_model"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Model String</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g. gemini-1.5-pro" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {form.watch("llm_provider") !== "algorithmic" && (
+                  <FormField
+                    control={form.control}
+                    name="llm_model"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Model String</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g. gemini-1.5-pro" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
               </div>
             </div>
 

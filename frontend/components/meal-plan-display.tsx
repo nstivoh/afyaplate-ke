@@ -36,7 +36,7 @@ const SwapSuggestions = ({ item, onSwap }: { item: MealItem, onSwap: (newItemNam
         const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
         // Use the first word to find similar category
         const query = item.food_name.split(' ')[0];
-        const response = await fetch(`${baseUrl}/food/search?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`${baseUrl}/foods/?query=${encodeURIComponent(query)}&limit=6`);
         if (response.ok) {
           const data = await response.json();
           const names = data.filter((f: any) => f.display_name !== item.food_name).map((f: any) => f.display_name).slice(0, 5);
@@ -117,14 +117,14 @@ const MealCard = ({ meal, onSwapItem, pricingData }: { meal: Meal, onSwapItem: (
   );
 };
 
-function SortableMealCard({ meal, onSwapItem, pricingData }: { meal: Meal, onSwapItem: (mealName: string, itemIndex: number, newItemName: string) => void, pricingData: PricingData }) {
+function SortableMealCard({ id, meal, onSwapItem, pricingData }: { id: string, meal: Meal, onSwapItem: (mealName: string, itemIndex: number, newItemName: string) => void, pricingData: PricingData }) {
   const {
     attributes,
     listeners,
     setNodeRef,
     transform,
     transition,
-  } = useSortable({ id: meal.meal_name });
+  } = useSortable({ id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -189,8 +189,8 @@ export function MealPlanDisplay({ plan: initialPlan }: MealPlanDisplayProps) {
     const { active, over } = event;
     if (over && active.id !== over.id) {
       setPlan((currentPlan) => {
-        const oldIndex = currentPlan.meals.findIndex((m) => m.meal_name === active.id);
-        const newIndex = currentPlan.meals.findIndex((m) => m.meal_name === over.id);
+        const oldIndex = Number(active.id);
+        const newIndex = Number(over.id);
         const newMeals = arrayMove(currentPlan.meals, oldIndex, newIndex);
         return { ...currentPlan, meals: newMeals };
       });
@@ -215,9 +215,16 @@ export function MealPlanDisplay({ plan: initialPlan }: MealPlanDisplayProps) {
         const key = Object.keys(pricingData).find(k => item.food_name.toLowerCase().includes(k));
         if (key) {
           const priceInfo = pricingData[key];
-          if (priceInfo.unit === 'piece') {
-            const quantity = parseInt(item.quantity.split(' ')[0]) || 1;
-            cost += priceInfo.price * quantity;
+          const qtyStr = item.quantity.toLowerCase();
+          const grams = parseFloat(qtyStr) || 100;
+
+          if (priceInfo.unit === 'kg') {
+            cost += priceInfo.price * (grams / 1000);
+          } else if (priceInfo.unit === 'piece') {
+            const pieces = parseInt(qtyStr) || 1;
+            cost += priceInfo.price * pieces;
+          } else if (priceInfo.unit === 'bundle' || priceInfo.unit === '250g') {
+            cost += priceInfo.price * (grams / 250);
           }
         }
       });
@@ -227,17 +234,17 @@ export function MealPlanDisplay({ plan: initialPlan }: MealPlanDisplayProps) {
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={plan.meals.map(m => m.meal_name)} strategy={rectSortingStrategy}>
+      <SortableContext items={plan.meals.map((_, i) => i.toString())} strategy={rectSortingStrategy}>
         <div className="mt-12 w-full">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-3xl font-bold">Your Daily Meal Plan</h2>
-            <Button onClick={exportToPdf} disabled={isExporting} variant="default" className="bg-primary text-white">
+            <Button onClick={exportToPdf} disabled={isExporting} variant="default" className="bg-primary text-white print:hidden">
               {isExporting ? "Exporting..." : "Download PDF"}
             </Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {plan.meals.map((meal) => (
-              <SortableMealCard key={meal.meal_name} meal={meal} onSwapItem={handleSwapItem} pricingData={pricingData} />
+            {plan.meals.map((meal, index) => (
+              <SortableMealCard key={index} id={index.toString()} meal={meal} onSwapItem={handleSwapItem} pricingData={pricingData} />
             ))}
           </div>
           <div className="mt-8 p-6 glassmorphism rounded-lg">

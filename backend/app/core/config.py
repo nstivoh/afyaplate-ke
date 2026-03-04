@@ -12,6 +12,10 @@ class Settings(BaseSettings):
 
     # LLM Provider Settings (Groq as default)
     LLM_API_KEY: str = "YOUR_LLM_API_KEY"
+    GEMINI_API_KEY: str = ""
+    OPENAI_API_KEY: str = ""
+    GROQ_API_KEY: str = ""
+    ANTHROPIC_API_KEY: str = ""
     LLM_BASE_URL: str = "https://api.groq.com/openai/v1"
     LLM_MODEL: str = "llama3-8b-8192" # Or other models like mixtral-8x7b-32768
 

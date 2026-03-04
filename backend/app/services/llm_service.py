@@ -89,8 +89,9 @@ async def generate_meal_plan(request: PlannerRequest) -> PlannerResponse:
     # Use google-genai for Gemini
     if request.llm_provider.lower() == "gemini":
         try:
-            import os
-            api_key_to_use = request.llm_api_key if request.llm_api_key and request.llm_api_key != "********************" else os.getenv("GEMINI_API_KEY")
+            from app.core.config import settings
+            server_key = settings.GEMINI_API_KEY
+            api_key_to_use = request.llm_api_key if request.llm_api_key and request.llm_api_key != "********************" else server_key
             # Use the async client
             client = genai.Client(api_key=api_key_to_use)
             model_id = request.llm_model if "gemini" in request.llm_model else "gemini-2.5-pro"
@@ -116,9 +117,19 @@ async def generate_meal_plan(request: PlannerRequest) -> PlannerResponse:
     litellm_model = f"{request.llm_provider}/{request.llm_model}"
 
     try:
+        from app.core.config import settings
+        keys = {
+            "openai": settings.OPENAI_API_KEY,
+            "groq": settings.GROQ_API_KEY,
+            "anthropic": settings.ANTHROPIC_API_KEY,
+            "gemini": settings.GEMINI_API_KEY,
+        }
+        fallback_key = keys.get(request.llm_provider.lower(), "")
+        api_key_to_use = request.llm_api_key if request.llm_api_key and request.llm_api_key != "********************" else fallback_key
+
         response = await acompletion(
             model=litellm_model,
-            api_key=request.llm_api_key,
+            api_key=api_key_to_use,
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},

@@ -36,15 +36,15 @@ export function FoodCard({ food }: FoodCardProps) {
       <CardContent className="flex-grow">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
           <div>
-            <p className="font-semibold text-secondary">Calories</p>
+            <p className="font-semibold text-muted-foreground">Calories</p>
             <p>{calories ?? "N/A"} kcal</p>
           </div>
           <div>
-            <p className="font-semibold text-secondary">Protein</p>
+            <p className="font-semibold text-muted-foreground">Protein</p>
             <p>{calculateNutrient(food.protein_g)} g</p>
           </div>
           <div>
-            <p className="font-semibold text-secondary">Carbs</p>
+            <p className="font-semibold text-muted-foreground">Carbs</p>
             <p>{calculateNutrient(food.carbs_g)} g</p>
           </div>
           <div>

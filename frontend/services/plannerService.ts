@@ -2,7 +2,7 @@
 import { PlannerResponse } from '@/types/planner';
 import type { MealPlannerFormValues } from '@/components/meal-planner';
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
 export async function generateMealPlan(params: MealPlannerFormValues): Promise<PlannerResponse> {
   const isAlgo = params.llm_provider.toLowerCase() === 'algorithmic';

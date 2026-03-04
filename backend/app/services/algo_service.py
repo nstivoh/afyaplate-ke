@@ -76,15 +76,15 @@ class AlgoService:
                 keywords = ["porridge", "tea", "bread", "egg", "milk", "uji"]
             elif i == 1:
                 meal_name = "Lunch"
-                keywords = ["rice", "ugali", "beef", "beans", "sukuma"]
+                keywords = ["rice", "ugali", "beans", "sukuma", "lentils"]
             elif i == meals_count - 1:
                 meal_name = "Dinner"
-                keywords = ["ugali", "fish", "chicken", "spinach", "stew"]
+                keywords = ["ugali", "spinach", "stew", "ndengu", "maharagwe"]
                 
             # Grab some candidate foods for this meal
             candidates = self._get_random_foods(
                 keywords, 
-                dietary_restrictions=request.dietary_restrictions or "", 
+                dietary_restrictions=", ".join(request.dietary_restrictions) if request.dietary_restrictions else "", 
                 limit=3
             )
             meal_items = []

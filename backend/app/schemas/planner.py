@@ -10,7 +10,7 @@ class PlannerRequest(BaseModel):
     num_meals: int = Field(3, example=3, description="Number of meals for the day")
     llm_provider: str = Field(..., example="gemini", description="AI Provider (e.g. gemini, openai, anthropic, groq)")
     llm_model: str = Field(..., example="gemini-1.5-flash", description="Specific Model mapping string")
-    llm_api_key: str = Field(..., example="AIzaSy...", description="API Key matching the provider")
+    llm_api_key: Optional[str] = Field(None, example="AIzaSy...", description="API Key matching the provider")
 
 class MacroNutrients(BaseModel):
     protein_g: float

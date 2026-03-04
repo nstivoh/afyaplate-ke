@@ -21,13 +21,17 @@ export function FoodSearch() {
   const [query, setQuery] = React.useState("");
   const [results, setResults] = React.useState<Food[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
   React.useEffect(() => {
     const timer = setTimeout(async () => {
       setIsLoading(true);
+      setError(false);
       try {
         const foods = await searchFoods(query, 24);
         setResults(foods);
+      } catch (e) {
+        setError(true);
       } finally {
         setIsLoading(false);
       }
@@ -45,13 +49,22 @@ export function FoodSearch() {
         className="w-full text-lg p-6 rounded-full glassmorphism"
       />
 
-      {isLoading ? (
+      {error ? (
+        <div className="mt-12 text-center glassmorphism p-8 rounded-lg">
+          <p className="text-muted-foreground text-destructive">Could not connect to the AfyaPlate API.</p>
+          <p className="text-sm mt-2 text-muted-foreground">Make sure the backend is running on port 8000.</p>
+        </div>
+      ) : isLoading ? (
         <div className="mt-12 flex justify-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
         </div>
       ) : results.length === 0 && query ? (
         <div className="mt-12 text-center text-muted-foreground glassmorphism p-8 rounded-lg">
           No foods found for "{query}". Try a different search term.
+        </div>
+      ) : results.length === 0 && !isLoading ? (
+        <div className="mt-12 text-center text-muted-foreground glassmorphism p-8 rounded-lg">
+          Start typing to search Kenyan foods, or browse below.
         </div>
       ) : (
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

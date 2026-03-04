@@ -14,17 +14,32 @@ export function ClientSelector({ onSelectClient }: ClientSelectorProps) {
     const [clients, setClients] = React.useState<Client[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
+    const [error, setError] = React.useState(false);
+
     React.useEffect(() => {
         async function loadClients() {
-            const data = await fetchClients();
-            setClients(data);
-            setIsLoading(false);
+            try {
+                const data = await fetchClients();
+                setClients(data);
+            } catch (err) {
+                setError(true);
+            } finally {
+                setIsLoading(false);
+            }
         }
         loadClients();
     }, []);
 
     if (isLoading) {
         return <div className="text-sm text-muted-foreground animate-pulse">Loading sample clients...</div>;
+    }
+
+    if (error) {
+        return (
+            <div className="text-sm text-destructive pb-4 border-b mb-4">
+                Could not load sample clients — is the backend running?
+            </div>
+        );
     }
 
     if (clients.length === 0) {
