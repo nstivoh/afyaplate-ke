@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { PlannerResponse } from '@/types/api';
+import { PlannerResponse } from '@/types/planner';
 
 interface PlannerState {
   plan: PlannerResponse | null;

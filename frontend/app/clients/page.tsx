@@ -28,12 +28,26 @@ import { v4 as uuidv4 } from 'uuid';
 export default function ClientsPage() {
   const [clients, setClients] = useLocalStorage<Client[]>("clients", []);
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-  
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const handleAddClient = (clientData: Omit<Client, "id">) => {
     const newClient = { ...clientData, id: uuidv4() };
     setClients([...clients, newClient]);
     setIsDialogOpen(false);
   };
+
+  if (!isMounted) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center p-24">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <p className="mt-4 text-lg text-muted-foreground">Loading clients...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center p-12 md:p-24">
@@ -54,7 +68,7 @@ export default function ClientsPage() {
             </DialogContent>
           </Dialog>
         </div>
-        
+
         <div className="glassmorphism p-4 rounded-lg">
           <Table>
             <TableHeader>
@@ -70,14 +84,11 @@ export default function ClientsPage() {
                   <TableRow key={client.id}>
                     <TableCell className="font-medium">{client.name}</TableCell>
                     <TableCell>{client.email}</TableCell>
-                    import Link from "next/link";
-//...
                     <TableCell>
-                       <Link href={`/report/${client.id}`} passHref>
-                         <Button variant="outline" size="sm">View Report</Button>
-                       </Link>
+                      <Link href={`/report/${client.id}`} passHref>
+                        <Button variant="outline" size="sm">View Report</Button>
+                      </Link>
                     </TableCell>
-//...
                   </TableRow>
                 ))
               ) : (

@@ -36,7 +36,9 @@ def seed_foods(db: Session):
             if not food_code:
                 continue
 
-            display_name = food_code if food_code else "Unknown Food"
+            food_name_en = row.get('food_name_english', '').strip()
+            food_name_sw = row.get('food_name_swahili', '').strip()
+            display_name = food_name_en or food_name_sw or food_code or "Unknown Food"
             
             food = SQLFood(
                 food_code=food_code,

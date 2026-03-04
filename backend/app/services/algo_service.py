@@ -7,24 +7,42 @@ from app.schemas.planner import PlannerRequest, PlannerResponse, Meal, MealItem,
 
 class AlgoService:
     def __init__(self):
-        self.db = SessionLocal()
+        pass
 
-    def _get_random_foods(self, category_keywords: List[str], limit: int = 5) -> List[SQLFood]:
+    def _get_random_foods(self, category_keywords: List[str], dietary_restrictions: str = "", limit: int = 5) -> List[SQLFood]:
         """Fetch foods that might fit a meal category (rudimentary filter)."""
         # In a real app we'd map KFCT categories better. Here we just grab random foods 
         # that roughly fit the requested categories by string matching, or just pure random.
-        foods = self.db.query(SQLFood).all()
+        with SessionLocal() as db:
+            foods = db.query(SQLFood).all()
+            for f in foods:
+                pass # trigger any basic load if needed, though all() loads simple columns
+            db.expunge_all() # Safely ensure instances can be accessed outside session
+        
+        forbidden_keywords = []
+        if dietary_restrictions:
+            dr = dietary_restrictions.lower()
+            if "vegetarian" in dr or "vegan" in dr:
+                forbidden_keywords.extend(["beef", "chicken", "fish", "meat", "pork", "mbuzi", "stew", "nyama"])
+            if "gluten-free" in dr or "gluten free" in dr:
+                forbidden_keywords.extend(["bread", "wheat", "chapati", "mandazi", "cake", "pasta", "spaghetti"])
         
         # very simple categorization
         filtered = []
+        allowed_foods = []
+        
         for f in foods:
             name = (f.food_name_english or "").lower()
+            if any(forbidden in name for forbidden in forbidden_keywords):
+                continue
+            
+            allowed_foods.append(f)
             if any(k in name for k in category_keywords):
                 filtered.append(f)
                 
         # Fallback to random if filter returns too few
         if len(filtered) < limit:
-            filtered.extend(random.sample(foods, min(limit * 2, len(foods))))
+            filtered.extend(random.sample(allowed_foods, min(limit * 2, len(allowed_foods))))
             
         return random.sample(filtered, min(limit, len(filtered)))
 
@@ -64,7 +82,11 @@ class AlgoService:
                 keywords = ["ugali", "fish", "chicken", "spinach", "stew"]
                 
             # Grab some candidate foods for this meal
-            candidates = self._get_random_foods(keywords, limit=3)
+            candidates = self._get_random_foods(
+                keywords, 
+                dietary_restrictions=request.dietary_restrictions or "", 
+                limit=3
+            )
             meal_items = []
             
             meal_cals = 0

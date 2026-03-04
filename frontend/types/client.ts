@@ -1,6 +1,8 @@
 export interface Client {
-    id: number;
+    id: string | number;
     name: string;
+    email?: string;
+    notes?: string;
     age: number | null;
     weight_kg: number | null;
     health_goal: string | null;

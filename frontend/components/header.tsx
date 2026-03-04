@@ -1,7 +1,9 @@
 "use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Menu } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +16,26 @@ import {
 import { Input } from "./ui/input";
 
 export function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [phone, setPhone] = useState("+254712345678");
+  const [paymentStatus, setPaymentStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handlePayment = async () => {
+    setPaymentStatus('loading');
+    try {
+      const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
+      const res = await fetch(`${API_BASE}/payments/stk-push`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone_number: phone, amount: 500 }),
+      });
+      if (!res.ok) throw new Error();
+      setPaymentStatus('success');
+    } catch {
+      setPaymentStatus('error');
+    }
+  };
+
   return (
     <header className="w-full px-8 py-4 flex justify-between items-center glassmorphism fixed top-0 left-0 right-0 z-50 backdrop-blur-sm">
       <Link href="/" className="text-2xl font-bold text-primary">
@@ -30,7 +52,7 @@ export function Header() {
           Clients
         </Link>
       </nav>
-      <div>
+      <div className="flex items-center gap-4">
         <Dialog>
           <DialogTrigger asChild>
             <Button>Go Pro</Button>
@@ -45,15 +67,38 @@ export function Header() {
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                 <Input id="phone" defaultValue="+254712345678" className="col-span-4" />
+                <Input
+                  id="phone"
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                  className="col-span-4"
+                />
               </div>
+              {paymentStatus === 'success' && <div className="text-sm text-green-500">Payment initiated successfully!</div>}
+              {paymentStatus === 'error' && <div className="text-sm text-red-500">Failed to initiate payment.</div>}
             </div>
             <DialogFooter>
-              <Button type="submit" className="w-full">Pay KES 500 with M-Pesa</Button>
+              <Button type="submit" className="w-full" onClick={handlePayment} disabled={paymentStatus === 'loading'}>
+                {paymentStatus === 'loading' ? 'Loading...' : 'Pay KES 500 with M-Pesa'}
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
+
+        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+          <Menu className="h-6 w-6" />
+        </button>
       </div>
+
+      {menuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-background border-b md:hidden">
+          <nav className="flex flex-col p-4 gap-4">
+            <Link href="/" onClick={() => setMenuOpen(false)}>Food Search</Link>
+            <Link href="/planner" onClick={() => setMenuOpen(false)}>AI Planner</Link>
+            <Link href="/clients" onClick={() => setMenuOpen(false)}>Clients</Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

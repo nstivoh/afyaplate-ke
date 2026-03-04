@@ -28,7 +28,7 @@ export function FoodCard({ food }: FoodCardProps) {
   return (
     <Card className="glassmorphism flex flex-col">
       <CardHeader>
-        <CardTitle className="text-lg font-bold text-primary h-12">
+        <CardTitle className="text-base font-bold text-primary line-clamp-2" title={food.food_name_english}>
           {food.food_name_english}
         </CardTitle>
         <p className="text-sm text-muted-foreground">{food.food_name_swahili}</p>

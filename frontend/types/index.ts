@@ -15,9 +15,4 @@ export interface Food {
   zinc_mg?: number;
 }
 
-export interface Client {
-  id: string;
-  name: string;
-  email: string;
-  notes?: string;
-}
+export type { Client } from './client';

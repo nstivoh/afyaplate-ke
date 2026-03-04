@@ -20,34 +20,20 @@ const fuseOptions = {
 export function FoodSearch() {
   const [query, setQuery] = React.useState("");
   const [results, setResults] = React.useState<Food[]>([]);
-  const [allFoods, setAllFoods] = React.useState<Food[]>([]);
-  const fuseRef = React.useRef<Fuse<Food> | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
-    async function loadFoods() {
+    const timer = setTimeout(async () => {
+      setIsLoading(true);
       try {
-        const foods = await searchFoods("", 1000);
-        setAllFoods(foods);
-        fuseRef.current = new Fuse(foods, fuseOptions);
-        setResults(foods.slice(0, 12)); // Show some initial results
-      } catch (error) {
-        console.error(error);
+        const foods = await searchFoods(query, 24);
+        setResults(foods);
+      } finally {
+        setIsLoading(false);
       }
-    }
-    loadFoods();
-  }, []);
-
-  React.useEffect(() => {
-    if (query.trim() === "") {
-      setResults(allFoods.slice(0, 12)); // Show initial results when query is cleared
-      return;
-    }
-
-    if (fuseRef.current) {
-      const searchResults = fuseRef.current.search(query);
-      setResults(searchResults.map(result => result.item));
-    }
-  }, [query, allFoods]);
+    }, 300); // 300ms debounce
+    return () => clearTimeout(timer);
+  }, [query]);
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -58,11 +44,22 @@ export function FoodSearch() {
         onChange={(e) => setQuery(e.target.value)}
         className="w-full text-lg p-6 rounded-full glassmorphism"
       />
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {results.map((food, idx) => (
-          <FoodCard key={`${food.food_code}-${idx}`} food={food} />
-        ))}
-      </div>
+
+      {isLoading ? (
+        <div className="mt-12 flex justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </div>
+      ) : results.length === 0 && query ? (
+        <div className="mt-12 text-center text-muted-foreground glassmorphism p-8 rounded-lg">
+          No foods found for "{query}". Try a different search term.
+        </div>
+      ) : (
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {results.map((food, idx) => (
+            <FoodCard key={`${food.food_code}-${idx}`} food={food} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

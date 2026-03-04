@@ -28,12 +28,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 const formSchema = z.object({
   target_calories: z.coerce.number().min(1000, "Must be at least 1000 calories"),
-  protein_grams: z.coerce.number().optional().nullable().transform(v => v ?? undefined),
-  fat_grams: z.coerce.number().optional().nullable().transform(v => v ?? undefined),
-  carb_grams: z.coerce.number().optional().nullable().transform(v => v ?? undefined),
+  protein_grams: z.coerce.number().optional(),
+  fat_grams: z.coerce.number().optional(),
+  carb_grams: z.coerce.number().optional(),
   dietary_restrictions: z.array(z.string()).default([]),
   num_meals: z.coerce.number().min(1, "Must have at least 1 meal").max(5, "Cannot have more than 5 meals"),
-  llm_api_key: z.string().min(1, "API Key is Required"),
+  llm_api_key: z.string().optional(),
   llm_provider: z.string().min(1, "Provider is Required"),
   llm_model: z.string().min(1, "Model is Required"),
 });
@@ -47,15 +47,15 @@ export function MealPlannerForm() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  const form = useForm({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema) as any,
     defaultValues: {
       target_calories: 2200,
       num_meals: 3,
       dietary_restrictions: [],
-      llm_api_key: "test_groq_api_key_123", // Default testing key
+      llm_api_key: "",
       llm_provider: "gemini",
-      llm_model: "gemini-2.0-pro",
+      llm_model: "gemini-2.5-flash",
     },
   });
 
@@ -64,7 +64,12 @@ export function MealPlannerForm() {
     setError(null);
     setPlan(null);
     try {
-      const response = await generateMealPlan(values);
+      const payload = { ...values };
+      if (!payload.llm_api_key) {
+        delete payload.llm_api_key;
+      }
+
+      const response = await generateMealPlan(payload as any);
       setPlan(response);
       localStorage.setItem('latest-meal-plan', JSON.stringify(response));
     } catch (err: any) {
@@ -260,7 +265,7 @@ export function MealPlannerForm() {
             />
             <div className="glassmorphism p-6 rounded-lg mt-8 space-y-6">
               <h3 className="text-xl font-bold text-primary mb-4">AI Configuration</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <FormField
                   control={form.control}
                   name="llm_provider"
@@ -294,19 +299,6 @@ export function MealPlannerForm() {
                       <FormLabel>Model String</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g. gemini-1.5-pro" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="llm_api_key"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>API Key</FormLabel>
-                      <FormControl>
-                        <Input type="password" placeholder="...sk..." {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

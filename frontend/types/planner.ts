@@ -7,6 +7,9 @@ export interface PlannerRequest {
   carb_grams?: number;
   dietary_restrictions?: string[];
   num_meals?: number;
+  llm_provider: string;
+  llm_model: string;
+  llm_api_key: string;
 }
 
 export interface MacroNutrients {

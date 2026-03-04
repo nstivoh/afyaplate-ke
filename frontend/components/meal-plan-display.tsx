@@ -28,31 +28,55 @@ interface MealPlanDisplayProps {
 }
 
 const SwapSuggestions = ({ item, onSwap }: { item: MealItem, onSwap: (newItemName: string) => void }) => {
-  const suggestions: { [key: string]: string[] } = {
-    "Sukuma Wiki": ["Spinach", "Cabbage", "Amarnath Greens (Mchicha)"],
-    "Ugali": ["Brown Ugali", "Rice", "Chapati"],
-    "Chicken Breast": ["Fish (Tilapia)", "Beef (Lean)", "Lentils (Ndengu)"],
-  };
+  const [suggestions, setSuggestions] = React.useState<string[] | null>(null);
 
-  const getSuggestions = (foodName: string) => {
-    const key = Object.keys(suggestions).find(k => foodName.toLowerCase().includes(k.toLowerCase()));
-    return key ? suggestions[key] : ["No suggestions available"];
+  const handleOpen = async (open: boolean) => {
+    if (open && suggestions === null) {
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
+        // Use the first word to find similar category
+        const query = item.food_name.split(' ')[0];
+        const response = await fetch(`${baseUrl}/food/search?query=${encodeURIComponent(query)}`);
+        if (response.ok) {
+          const data = await response.json();
+          const names = data.filter((f: any) => f.display_name !== item.food_name).map((f: any) => f.display_name).slice(0, 5);
+          setSuggestions(names.length ? names : ["No direct swaps found"]);
+        } else {
+          setSuggestions(["Failed to load swaps"]);
+        }
+      } catch (e) {
+        setSuggestions(["Error loading swaps"]);
+      }
+    }
   }
 
   return (
-    <Popover>
+    <Popover onOpenChange={handleOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="ml-2">Swap</Button>
       </PopoverTrigger>
       <PopoverContent className="w-48 p-2">
         <ul className="space-y-1">
-          {getSuggestions(item.food_name).map(suggestion => (
-            <li key={suggestion}>
-              <Button variant="ghost" size="sm" className="w-full justify-start" onClick={() => onSwap(suggestion)}>
-                {suggestion}
-              </Button>
-            </li>
-          ))}
+          {!suggestions ? (
+            <li className="text-sm text-center text-gray-500 py-2">Loading...</li>
+          ) : (
+            suggestions.map(suggestion => (
+              <li key={suggestion}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full justify-start text-left whitespace-normal h-auto py-2"
+                  onClick={() => {
+                    if (suggestion !== "No direct swaps found" && suggestion !== "Failed to load swaps" && suggestion !== "Error loading swaps") {
+                      onSwap(suggestion)
+                    }
+                  }}
+                >
+                  {suggestion}
+                </Button>
+              </li>
+            ))
+          )}
         </ul>
       </PopoverContent>
     </Popover>
@@ -67,12 +91,12 @@ const MealCard = ({ meal, onSwapItem, pricingData }: { meal: Meal, onSwapItem: (
   }
 
   return (
-    <Card className="glassmorphism h-full">
+    <Card className="glassmorphism h-full print:bg-white print:text-black print:border-gray-300">
       <CardHeader>
-        <CardTitle className="text-xl text-primary">{meal.meal_name}</CardTitle>
-        <p className="text-sm text-muted-foreground">{meal.total_calories} calories</p>
+        <CardTitle className="text-xl text-primary print:text-black">{meal.meal_name}</CardTitle>
+        <p className="text-sm text-muted-foreground print:text-gray-700">{meal.total_calories} calories</p>
       </CardHeader>
-      <CardContent>
+      <CardContent className="print:text-black">
         <ul className="space-y-2">
           {meal.items.map((item, index) => {
             const priceInfo = findPrice(item.food_name);
@@ -133,7 +157,8 @@ export function MealPlanDisplay({ plan: initialPlan }: MealPlanDisplayProps) {
   const exportToPdf = async () => {
     setIsExporting(true);
     try {
-      const response = await fetch("http://localhost:8000/api/v1/planner/export-pdf", {
+      const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
+      const response = await fetch(`${API_BASE}/planner/export-pdf`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

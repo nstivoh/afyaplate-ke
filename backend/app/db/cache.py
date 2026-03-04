@@ -20,7 +20,9 @@ async def load_food_data_to_redis():
     logger.info("Flushed Redis DB. Starting to load food data...")
 
     # Construct absolute path to the CSV file
-    csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'kfct_clean.csv'))
+    from pathlib import Path
+    DATA_DIR = Path(__file__).resolve().parents[2] / "data"
+    csv_path = DATA_DIR / "kfct_clean.csv"
 
     try:
         with open(csv_path, mode='r', encoding='utf-8') as csvfile:
