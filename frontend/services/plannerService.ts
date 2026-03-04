@@ -4,15 +4,23 @@ import type { MealPlannerFormValues } from '@/components/meal-planner';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
-export async function generateMealPlan(params: MealPlannerFormValues): Promise<PlannerResponse> {
+export async function generateMealPlan(
+  params: MealPlannerFormValues,
+  userToken?: string | null,
+): Promise<PlannerResponse> {
   const isAlgo = params.llm_provider.toLowerCase() === 'algorithmic';
   const endpoint = isAlgo ? '/planner/generate-algorithmic' : '/planner/generate';
 
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (userToken) {
+    headers['x-user-token'] = userToken;
+  }
+
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify(params),
   });
 
@@ -27,3 +35,4 @@ export async function generateMealPlan(params: MealPlannerFormValues): Promise<P
 
   return response.json();
 }
+

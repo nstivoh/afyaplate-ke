@@ -22,8 +22,11 @@ import { PlannerResponse } from "@/types/planner";
 import { usePlannerStore } from "@/store/usePlannerStore";
 import { ClientSelector } from "@/components/client-selector";
 import { Client } from "@/types/client";
+import { UpgradeGate } from "@/components/upgrade-gate";
+import { PricingModal } from "@/components/pricing-modal";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 const MealPlanDisplay = React.lazy(() => import('./meal-plan-display').then(module => ({ default: module.MealPlanDisplay })));
-import { Loader2 } from "lucide-react";
+import { Loader2, Lock } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const formSchema = z.object({
@@ -47,6 +50,8 @@ export function MealPlannerForm() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [selectedClientId, setSelectedClientId] = React.useState<string | null>(null);
+  const [pricingOpen, setPricingOpen] = React.useState(false);
+  const { isActive, token } = useSubscription();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema) as any,
@@ -66,11 +71,17 @@ export function MealPlannerForm() {
     setPlan(null);
     try {
       const payload = { ...values };
+
+      // Free users are redirected to algorithmic planner automatically
+      if (!isActive && payload.llm_provider !== "algorithmic") {
+        payload.llm_provider = "algorithmic";
+      }
+
       if (!payload.llm_api_key) {
         delete payload.llm_api_key;
       }
 
-      const response = await generateMealPlan(payload as any);
+      const response = await generateMealPlan(payload as any, isActive ? token : null);
       setPlan(response);
       localStorage.setItem('latest-meal-plan', JSON.stringify(response));
       if (selectedClientId) {
@@ -268,51 +279,56 @@ export function MealPlannerForm() {
                 </FormItem>
               )}
             />
-            <div className="glassmorphism p-6 rounded-lg mt-8 space-y-6">
-              <h3 className="text-xl font-bold text-primary mb-4">AI Configuration</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <FormField
-                  control={form.control}
-                  name="llm_provider"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Provider</FormLabel>
-                      <FormControl>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Provider" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="gemini">Google Gemini</SelectItem>
-                            <SelectItem value="openai">OpenAI (ChatGPT)</SelectItem>
-                            <SelectItem value="anthropic">Anthropic (Claude)</SelectItem>
-                            <SelectItem value="groq">Groq</SelectItem>
-                            <SelectItem value="qwen">Qwen</SelectItem>
-                            <SelectItem value="algorithmic">Algorithmic Planner (Free / Offline)</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                {form.watch("llm_provider") !== "algorithmic" && (
+            {/* AI Configuration — gated for Pro/Trial */}
+            <UpgradeGate feature="AI Meal Planner" onUpgradeClick={() => setPricingOpen(true)}>
+              <div className="glassmorphism p-6 rounded-lg mt-8 space-y-6">
+                <h3 className="text-xl font-bold text-primary mb-4">AI Configuration</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <FormField
                     control={form.control}
-                    name="llm_model"
+                    name="llm_provider"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Model String</FormLabel>
+                        <FormLabel>Provider</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g. gemini-1.5-pro" {...field} />
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select Provider" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="gemini">Google Gemini</SelectItem>
+                              <SelectItem value="openai">OpenAI (ChatGPT)</SelectItem>
+                              <SelectItem value="anthropic">Anthropic (Claude)</SelectItem>
+                              <SelectItem value="groq">Groq</SelectItem>
+                              <SelectItem value="qwen">Qwen</SelectItem>
+                              <SelectItem value="algorithmic">Algorithmic Planner (Free / Offline)</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                )}
+                  {form.watch("llm_provider") !== "algorithmic" && (
+                    <FormField
+                      control={form.control}
+                      name="llm_model"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Model String</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g. gemini-1.5-pro" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
+            </UpgradeGate>
+
+            <PricingModal open={pricingOpen} onOpenChange={setPricingOpen} />
 
             <Button type="submit" disabled={isLoading} className="w-full text-lg py-6 mt-8">
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

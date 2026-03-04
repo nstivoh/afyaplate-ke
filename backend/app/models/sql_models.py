@@ -1,5 +1,8 @@
 from sqlalchemy import Column, Integer, String, Float
 from app.db.database import Base
+# Import subscription model so it is registered with Base.metadata
+from app.models.subscription import SQLSubscription  # noqa: F401
+
 
 class SQLFood(Base):
     __tablename__ = "foods"

@@ -24,15 +24,30 @@ class MpesaService:
             "Authorization": f"Basic {encoded_credentials}"
         }
         
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(timeout=15.0) as client:
             try:
                 response = await client.get(url, headers=headers)
-                response.raise_for_status()
+                logger.info(f"Access token response status: {response.status_code}")
+                if response.status_code != 200:
+                    logger.error(f"Access token HTTP {response.status_code}: {response.text[:500]}")
+                    raise Exception(f"Safaricom auth returned HTTP {response.status_code}. Check your consumer key/secret.")
+                # Guard against HTML error pages (e.g. Incapsula CDN block)
+                content_type = response.headers.get("content-type", "")
+                if "html" in content_type.lower():
+                    logger.error(f"Safaricom returned HTML instead of JSON (possible CDN block): {response.text[:300]}")
+                    raise Exception("Safaricom server returned an unexpected HTML response. The sandbox may be temporarily blocking requests from this IP. Try again shortly.")
                 data = response.json()
-                return data.get("access_token")
+                token = data.get("access_token")
+                if not token:
+                    logger.error(f"No access_token in response: {data}")
+                    raise Exception("No access_token returned from Safaricom.")
+                return token
+            except httpx.TimeoutException:
+                logger.error("Timed out connecting to Safaricom auth endpoint")
+                raise Exception("Connection to Safaricom timed out. Please try again.")
             except Exception as e:
                 logger.error(f"Failed to get M-Pesa access token: {e}")
-                raise Exception(f"Failed to get access token: {str(e)}")
+                raise
 
     async def trigger_stk_push(self, phone_number: str, amount: int) -> dict:
         """
@@ -75,20 +90,30 @@ class MpesaService:
             "TransactionDesc": "Meal Plan Premium"
         }
         
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(timeout=20.0) as client:
             try:
                 response = await client.post(url, headers=headers, json=payload)
+                # Guard against Incapsula HTML block pages
+                content_type = response.headers.get("content-type", "")
+                if "html" in content_type.lower():
+                    logger.error(f"Safaricom STK endpoint returned HTML (CDN block): {response.text[:300]}")
+                    raise Exception("Safaricom returned an unexpected response (CDN block). Please try again in a moment.")
                 response.raise_for_status()
                 return response.json()
+            except httpx.TimeoutException:
+                logger.error("Timed out connecting to Safaricom STK endpoint")
+                raise Exception("Connection to Safaricom timed out. Please try again.")
             except httpx.HTTPStatusError as e:
-                logger.error(f"M-Pesa API Error: {e.response.text}")
+                raw = e.response.text
+                logger.error(f"M-Pesa API Error: {raw}")
                 try:
                     error_data = e.response.json()
-                    raise Exception(f"M-Pesa Error: {error_data.get('errorMessage', str(e))}")
-                except Exception:
-                    raise Exception(f"M-Pesa HTTP Error: {e.response.status_code}")
+                    msg = error_data.get('errorMessage') or error_data.get('ResultDesc') or str(e)
+                    raise Exception(f"M-Pesa Error: {msg}")
+                except (json.JSONDecodeError, ValueError):
+                    raise Exception(f"M-Pesa HTTP Error {e.response.status_code}: {raw[:200]}")
             except Exception as e:
                 logger.error(f"Failed to trigger STK push: {e}")
-                raise Exception(f"M-Pesa Request Failed: {str(e)}")
+                raise
 
 mpesa_service = MpesaService()

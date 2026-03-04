@@ -5,20 +5,22 @@ import logging
 
 from app.api.v1.api import api_router
 from app.core.config import settings
-from app.db.cache import load_food_data_to_redis, on_shutdown
+from app.db.database import engine, Base
+import app.models.sql_models  # noqa: F401 — registers all models with Base
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup event
+    # Create all database tables (including subscriptions) on startup
+    Base.metadata.create_all(bind=engine)
     logger.info("Starting up...")
-    await load_food_data_to_redis()
     yield
     # Shutdown event
     logger.info("Shutting down...")
-    await on_shutdown()
+
+
 
 
 app = FastAPI(
