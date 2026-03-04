@@ -77,7 +77,7 @@ export default function ReportPage() {
           </div>
           <div className="text-right">
             <h2 className="text-2xl font-semibold">{client.name}</h2>
-            <p className="text-md">{client.email}</p>
+            {client.email && <p className="text-md">{client.email}</p>}
           </div>
         </header>
 

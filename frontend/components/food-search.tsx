@@ -28,7 +28,7 @@ export function FoodSearch() {
       setIsLoading(true);
       setError(false);
       try {
-        const foods = await searchFoods(query, 24);
+        const foods = await searchFoods(query, 12);
         setResults(foods);
       } catch (e) {
         setError(true);

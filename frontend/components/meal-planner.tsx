@@ -35,7 +35,7 @@ const formSchema = z.object({
   num_meals: z.coerce.number().min(1, "Must have at least 1 meal").max(5, "Cannot have more than 5 meals"),
   llm_api_key: z.string().optional(),
   llm_provider: z.string().min(1, "Provider is Required"),
-  llm_model: z.string().min(1, "Model is Required"),
+  llm_model: z.string().optional().default(""),
 });
 
 export type MealPlannerFormValues = z.infer<typeof formSchema>;

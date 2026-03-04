@@ -12,6 +12,6 @@ export async function fetchClients(): Promise<Client[]> {
         return response.json();
     } catch (error) {
         console.error("Failed to fetch clients:", error);
-        return [];
+        throw error;
     }
 }

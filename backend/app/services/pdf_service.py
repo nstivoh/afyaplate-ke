@@ -15,7 +15,7 @@ def generate_meal_plan_pdf(plan: PlannerResponse) -> BytesIO:
     template = env.get_template("meal_plan.html")
     
     # Render HTML with plan data
-    html_content = template.render(plan=plan.dict())
+    html_content = template.render(plan=plan.model_dump())
     
     # Convert HTML to PDF in memory
     pdf_buffer = BytesIO()

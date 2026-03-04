@@ -49,6 +49,7 @@ export function ClientForm({ onSubmit, isSubmitting }: ClientFormProps) {
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     onSubmit({
       ...values,
+      email: values.email || undefined,
       age: values.age ? Number(values.age) : null,
       weight_kg: values.weight_kg ? Number(values.weight_kg) : null,
       health_goal: values.health_goal || null,
